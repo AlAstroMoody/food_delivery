@@ -13,7 +13,10 @@ export default {
   data() {
     return {
       //  брать из api как доделаю его
-      promoImages: ["../assets/dr.png", "../assets/mikedowntown.png"]
+      promoImages: [
+        "http://127.0.0.1:8000/media/promo/dr.png",
+        "http://127.0.0.1:8000/media/promo/mikedowntown.png"
+      ]
     };
   },
   components: {

@@ -1,10 +1,12 @@
 <template>
   <div class="cafe-info">
     <span class="cafe-info__block-about">
+      <i class="el-icon-knife-fork" />
       Мы — это <a href="/about/">уютное кафе</a> итальянской домашней кухни в
       центре города
     </span>
     <span class="cafe-info__block-map">
+      <i class="el-icon-location" />
       Наш адрес:
       <div class="cafe-info__address-link">
         <a href="/map/?department=1"> ул.&nbsp;Диктатуры пролетариата, 32а</a>
@@ -14,6 +16,7 @@
       </div>
     </span>
     <span class="cafe-info__block-delivery">
+      <i class="el-icon-truck" />
       <a href="/delivery/">Время работы и условия доставки</a>
     </span>
   </div>
@@ -29,13 +32,11 @@ export default {
 .cafe-info {
   display: flex;
   flex-direction: column;
-  margin: 15px 20px 0 0;
-  width: 286px;
+  justify-content: space-around;
   text-align: left;
-  font-size: 19px;
-  font-weight: 300;
+  font-size: 20px;
   line-height: 1.21;
-  padding-left: 46px;
-  position: relative;
+  padding: 3%;
+  width: 32%;
 }
 </style>

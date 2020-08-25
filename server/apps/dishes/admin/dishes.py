@@ -5,4 +5,4 @@ from apps.dishes.models import Dish
 
 @admin.register(Dish)
 class DishAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'image', 'price', 'description')
+    list_display = ('id', 'name', 'image', 'price', 'description', 'category')

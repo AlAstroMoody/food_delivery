@@ -1,11 +1,21 @@
 from django.db import models
 
 
-class Dish(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='upload/dish', blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Dish(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='dishes/', blank=True)
+    image_big = models.ImageField(upload_to='dish_big/', blank=True)
     price = models.PositiveSmallIntegerField(blank=True, null=True)
     description = models.CharField(max_length=500)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    weight = models.CharField(max_length=10)
 
     def __str__(self):
         return self.name
