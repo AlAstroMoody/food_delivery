@@ -1,11 +1,23 @@
 <template>
   <div class="home">
     <Cafe />
+    <ModalDish v-if="modalVisible" @showModal="showModal" :dish="dish" />
     <section class="home__main">
-      <SlickBag class="slick-bag" />
+      <SlickBag
+        class="slick-bag"
+        :order="order"
+        :dishes="dishes"
+        @removeDishInOrder="removeDishInOrder"
+        @addToOrder="addToOrder"
+        @decreaseQuantityInOrder="decreaseQuantityInOrder"
+      />
       <section class="home__menu">
         <div v-for="dish in dishes" :key="dish.id" class="home__menu-cards">
-          <DishCard :dish="dish" />
+          <DishCard
+            :dish="dish"
+            @addToOrder="addToOrder"
+            @showModal="showModal"
+          />
         </div>
       </section>
     </section>
@@ -18,21 +30,48 @@ import Cafe from "../components/Cafe";
 import DishCard from "../components/DishCard";
 import Footer from "../components/Footer";
 import SlickBag from "../components/SlickBag";
+import ModalDish from "../components/ModalDish";
 import { mapActions } from "vuex";
 export default {
   name: "Home",
-  components: { Cafe, DishCard, Footer, SlickBag },
+  data() {
+    return {
+      modalVisible: false,
+      dish: {}
+    };
+  },
+  components: { Cafe, DishCard, Footer, SlickBag, ModalDish },
   methods: {
-    ...mapActions(["getAllDishes"])
+    ...mapActions([
+      "getAllDishes",
+      "editOrder",
+      "removeDishInOrder",
+      "decreaseQuantityInOrder"
+    ]),
+    addToOrder(id) {
+      this.$store.dispatch("editOrder", id);
+    },
+    removeDishInOrder(id) {
+      this.$store.dispatch("removeDishInOrder", id);
+    },
+    showModal(dish) {
+      this.modalVisible = !this.modalVisible;
+      this.dish = dish;
+    },
+    decreaseQuantityInOrder(id) {
+      this.$store.dispatch("decreaseQuantityInOrder", id);
+    }
   },
   computed: {
     dishes() {
       return this.$store.state.dishes;
+    },
+    order() {
+      return this.$store.state.order;
     }
   },
   created() {
     this.$store.dispatch("getAllDishes");
-    console.log(this.dishes);
   }
 };
 </script>
@@ -45,18 +84,19 @@ export default {
 }
 .home__main {
   display: flex;
-  width: 80%;
+  width: 100%;
+  justify-content: space-evenly;
 }
 .slick-bag {
   width: 20%;
-  max-height: 300px;
   border-radius: 10%;
+  position: sticky;
+  top: 0;
 }
 .home__menu {
   display: flex;
-  width: 80%;
+  width: 70%;
   flex-wrap: wrap;
-  justify-content: space-around;
 }
 .home__menu-cards {
   display: flex;

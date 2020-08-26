@@ -1,11 +1,16 @@
 <template>
   <el-card class="dish" :body-style="{ padding: '0px' }" shadow="hover">
-    <el-image :src="dish.image" class="dish__image" />
+    <el-image :src="dish.image" class="dish__image" @click="showModal" />
     <div class="dish__footer">
       <h1 class="dish__footer-title">{{ dish.name }}</h1>
       <div class="dish__footer-order">
         {{ dish.price }}₽
-        <el-button round class="dish__footer-button">Заказать</el-button>
+        <el-button
+          round
+          class="dish__footer-button"
+          @click="addToOrder(dish.id)"
+          >Заказать</el-button
+        >
       </div>
     </div>
   </el-card>
@@ -18,6 +23,19 @@ export default {
     dish: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    addToOrder(id) {
+      this.$notify({
+        title: this.dish.name,
+        message: "Добавлено в заказ",
+        type: "success"
+      });
+      this.$emit("addToOrder", id);
+    },
+    showModal() {
+      this.$emit("showModal", this.dish);
     }
   }
 };
