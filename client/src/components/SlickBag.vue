@@ -4,70 +4,56 @@
     <div class="slick-bag__body" v-if="order.length === 0">
       Нажмите «ЗАКАЗАТЬ» чтобы товар добавился к заказу.
     </div>
-    <el-main class="slick-bag__order">
-      <div v-for="dish in order" :key="dish[0]">
-        <div>{{ showDishName(dish[0]) }}</div>
-        <div class="slick-bag__order-action">
-          <i class="el-icon-circle-close" @click="removeDish(dish[0])"></i>
-          <i>{{ dish[1] }} шт.</i>
-          <i class="el-icon-remove-outline" @click="minusDish(dish[0])"></i>
-          <i class="el-icon-circle-plus-outline" @click="plusDish(dish[0])"></i>
-          <i>{{ showDishPrice(dish[0]) * dish[1] }}₽</i>
-        </div>
-      </div>
-    </el-main>
-    <span class="slick-bag__price"> {{ priceCalculation() }}₽</span>
+    <OrderItems
+      :order="order"
+      :dishes="dishes"
+      @addToOrder="addToOrder"
+      @decreaseQuantityInOrder="decreaseQuantityInOrder"
+      @removeDishInOrder="removeDishInOrder"
+      class="slick-bag__order-items"
+    />
     <div class="slick-bag__footer">
-      <el-button round class="slick-bag__button">Оформить заказ</el-button>
+      <el-button
+        round
+        class="slick-bag__button"
+        @click="placeInOrder"
+        :disabled="!isButtonDisabled()"
+      >
+        Оформить заказ
+      </el-button>
     </div>
   </el-card>
 </template>
 
 <script>
+import OrderItems from "@/components/OrderItems";
 export default {
   name: "SlickBag",
+  components: { OrderItems },
   props: {
     dishes: {
       type: Array,
       default: () => []
-    }
-  },
-  computed: {
-    order() {
-      return this.$store.state.order;
+    },
+    order: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {
-    removeDish(id) {
-      this.$emit("removeDishInOrder", id);
+    placeInOrder() {
+      this.$router.push({ name: "Order" });
     },
-    showDishName(id) {
-      for (let dish of this.dishes) {
-        if (dish.id === id) {
-          return dish.name;
-        }
-      }
+    isButtonDisabled() {
+      return this.order.length > 0;
     },
-    showDishPrice(id) {
-      for (let dish of this.dishes) {
-        if (dish.id === id) {
-          return dish.price;
-        }
-      }
-    },
-    priceCalculation() {
-      let totalPrice = 0;
-      for (let position of this.order) {
-        totalPrice +=
-          this.dishes.find(original => original.id === position[0]).price *
-          position[1];
-      }
-      return totalPrice;
-    },
-    plusDish(id) {
+    addToOrder(id) {
       this.$emit("addToOrder", id);
     },
-    minusDish(id) {
+    removeDishInOrder(id) {
+      this.$emit("removeDishInOrder", id);
+    },
+    decreaseQuantityInOrder(id) {
       this.$emit("decreaseQuantityInOrder", id);
     }
   }
@@ -104,28 +90,13 @@ export default {
   font-size: 55px;
   padding: 15px 0;
 }
-.slick-bag__price {
-  display: block;
-  color: orange;
-  font-size: 35px;
-  margin: 3%;
-  padding: 2%;
-}
+
 .slick-bag__button {
   font-size: 30px;
   background: #f2f2f2;
 }
-.slick-bag__order {
-  display: flex;
-  flex-direction: column;
+
+.slick-bag__order-items {
   font-size: 20px;
-  text-align: left;
-  max-height: 300px;
-}
-.slick-bag__order-action {
-  display: flex;
-  margin: 5%;
-  justify-content: space-around;
-  border-bottom: 1px solid #e5e5e5;
 }
 </style>

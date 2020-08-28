@@ -1,12 +1,23 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getDishes } from "../api/dishes";
+import { getDishes } from "@/api/dishes";
+import createPersistedState from "vuex-persistedstate";
+import { authUser, registerUser } from "@/api/users";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     dishes: [],
-    order: []
+    order: [],
+    token: {
+      token: localStorage.getItem("token") || "",
+      user: {
+        pk: "",
+        username: ""
+      }
+    },
+    statusAuth: false
   },
   mutations: {
     SET_DISHES: (state, dishes) => {
@@ -36,6 +47,22 @@ export default new Vuex.Store({
       if (count > 1) {
         state.order.splice(index, 1, [payload, count - 1]);
       } else state.order.splice(index, 1);
+    },
+    AUTH_USER: (state, token) => {
+      state.token = token;
+      state.statusAuth = true;
+    },
+    LOGOUT: state => {
+      state.token.token = "";
+      state.token.user.username = "";
+      state.token.user.pk = "";
+      state.statusAuth = false;
+    },
+    REGISTER_USER(state) {
+      state.statusAuth = true;
+    },
+    ERROR(state) {
+      state.statusAuth = false;
     }
   },
   actions: {
@@ -50,7 +77,23 @@ export default new Vuex.Store({
     },
     async decreaseQuantityInOrder({ commit }, payload) {
       commit("DECREASE_QUANTITY_DISH_IN_ORDER", payload);
+    },
+    async signIn({ commit }, user) {
+      commit("AUTH_USER", await authUser(user));
+    },
+    async logout({ commit }) {
+      commit("LOGOUT");
+      localStorage.removeItem("token");
+    },
+    async registerNewUser({ commit }, user) {
+      try {
+        commit("REGISTER_USER", await registerUser(user));
+        commit("AUTH_USER", await authUser(user));
+      } catch {
+        commit("ERROR");
+      }
     }
   },
-  modules: {}
+  modules: {},
+  plugins: [createPersistedState()]
 });

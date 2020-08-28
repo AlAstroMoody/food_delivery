@@ -2,9 +2,8 @@
   <div class="phone">
     <span class="phone__text">{{ title }}</span>
     <span class="phone__number">
-      <i class="el-icon-knife-fork" v-if="!delivery" />
-      <i class="el-icon-truck" v-if="delivery" />
-      {{ phone }}
+      <i class="el-icon-knife-fork" v-if="!delivery">{{ phone }} </i>
+      <i class="el-icon-truck" v-if="delivery">{{ phone }} </i>
     </span>
   </div>
 </template>
@@ -42,8 +41,8 @@ export default {
 }
 
 .phone__number {
-  font-size: 30px;
-  display: flex;
+  font-size: 25px;
+  min-width: 140px;
   color: white;
 }
 </style>

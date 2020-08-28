@@ -9,8 +9,8 @@
           round
           class="dish__footer-button"
           @click="addToOrder(dish.id)"
-          >Заказать</el-button
-        >
+          >Заказать
+        </el-button>
       </div>
     </div>
   </el-card>
@@ -50,10 +50,9 @@ export default {
   border-radius: 6%;
   text-align: center;
 }
-.dish__image {
-}
+
 .dish__footer {
-  min-height: 150px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -83,7 +82,6 @@ export default {
 .dish__footer-button {
   background: orange;
   padding: 5%;
-  font: 15px/1 "Roboto", sans-serif;
   font-size: 20px;
   color: white;
   box-shadow: 0 0 5px 0 rgba(252, 146, 33, 0.5);

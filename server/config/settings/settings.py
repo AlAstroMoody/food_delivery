@@ -160,3 +160,18 @@ REST_FRAMEWORK = {
 if DEBUG:
     del REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES']
 
+##################################################################
+# Caches settings
+##################################################################
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        "LOCATION": "redis://redis:6379/",
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+CACHE_TTL = 60 * 30
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"

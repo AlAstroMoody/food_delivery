@@ -11,6 +11,7 @@ services:
             - 8000:8000
         depends_on:
             - db
+            - redis
             - frontend
         environment:
             DEBUG: 'True'
@@ -33,3 +34,11 @@ services:
         ports:
             - 8080:8080
         command: yarn serve
+
+    redis:
+        image: redis:6.0.6-alpine
+        restart: always
+        volumes:
+            - ./data:/data
+        ports:
+            - "6379:6379"

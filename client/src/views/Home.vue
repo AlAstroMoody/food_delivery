@@ -21,14 +21,12 @@
         </div>
       </section>
     </section>
-    <Footer />
   </div>
 </template>
 
 <script>
 import Cafe from "../components/Cafe";
 import DishCard from "../components/DishCard";
-import Footer from "../components/Footer";
 import SlickBag from "../components/SlickBag";
 import ModalDish from "../components/ModalDish";
 import { mapActions } from "vuex";
@@ -40,23 +38,22 @@ export default {
       dish: {}
     };
   },
-  components: { Cafe, DishCard, Footer, SlickBag, ModalDish },
+  components: { Cafe, DishCard, SlickBag, ModalDish },
   methods: {
     ...mapActions([
-      "getAllDishes",
       "editOrder",
       "removeDishInOrder",
       "decreaseQuantityInOrder"
     ]),
+    showModal(dish) {
+      this.modalVisible = !this.modalVisible;
+      this.dish = dish;
+    },
     addToOrder(id) {
       this.$store.dispatch("editOrder", id);
     },
     removeDishInOrder(id) {
       this.$store.dispatch("removeDishInOrder", id);
-    },
-    showModal(dish) {
-      this.modalVisible = !this.modalVisible;
-      this.dish = dish;
     },
     decreaseQuantityInOrder(id) {
       this.$store.dispatch("decreaseQuantityInOrder", id);
@@ -69,9 +66,6 @@ export default {
     order() {
       return this.$store.state.order;
     }
-  },
-  created() {
-    this.$store.dispatch("getAllDishes");
   }
 };
 </script>
