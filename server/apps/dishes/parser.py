@@ -1,4 +1,5 @@
 import csv
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -11,6 +12,7 @@ def get_html(url):
 
 def get_all_dishes_from_menu(html):
     soup = BeautifulSoup(html, "html.parser")
+    # парсим информацию о блюдах с главной страницы
     all_dish = soup.find('div', class_='pins__content').findAll('article')
     static_url = 'https://mikeandmollycafe.ru/static/'
     for dish in all_dish:
@@ -25,6 +27,16 @@ def get_all_dishes_from_menu(html):
             writer = csv.writer(output)
             row = (name, price, url_image_big, url_image,
                    category, description, weight)
+            writer.writerow(row)
+
+    # парсим ссылки изображений со слайдера главной страницы
+    promo = soup.find('div', class_='js_slides').findAll('a')
+    for element in promo:
+        image = f'{static_url}{(element.get("style"))[30:-2]}'
+        name = urlparse(image).path.split('/')[-1]
+        with open('./csv/promo.csv', 'a', encoding='utf-8') as output:
+            writer = csv.writer(output)
+            row = (name, image)
             writer.writerow(row)
 
 

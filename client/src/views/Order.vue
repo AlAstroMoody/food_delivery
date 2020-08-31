@@ -83,22 +83,21 @@ export default {
     },
     async createOrder(formData) {
       if (this.order.length > 0) {
-        await addOrder(formData).then(
-          response => (this.order_id = response["id"])
-        );
-        if (this.order_id) {
+        await addOrder(formData).then(response => (this.newOrder = response));
+        if (this.newOrder["id"]) {
           for (let position of this.order) {
             let dishesFormData = new FormData();
             dishesFormData.set("dish", position[0]);
             dishesFormData.set("count", position[1]);
-            dishesFormData.set("order", this.order_id);
+            dishesFormData.set("order", this.newOrder["id"]);
             await addDishesToOrder(dishesFormData);
           }
-          await getOrder(this.order_id).then(
+          await getOrder(this.newOrder["id"]).then(
             response => (this.orderInfo = response)
           );
           this.$notify.info({
-            title: "Заказ №" + this.orderInfo["id"],
+            title:
+              this.newOrder["user_name"] + ", заказ №" + this.orderInfo["id"],
             message:
               "на сумму " + this.orderInfo["total_price"] + " отдан в работу!"
           });
@@ -157,15 +156,15 @@ export default {
 .orderItems {
   width: 50%;
   font-size: 25px;
-  min-width: 300px;
+  min-width: 350px;
 }
 .order__is-auth {
   text-align: center;
   width: 30%;
-  min-width: 300px;
+  min-width: 350px;
 }
 .order__client-info {
-  width: 30%;
-  min-width: 300px;
+  width: 40%;
+  min-width: 350px;
 }
 </style>

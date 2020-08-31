@@ -19,13 +19,17 @@ class Status(models.Model):
 
 class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    comments = models.TextField(max_length=1000, blank=True,
+    comment = models.TextField(max_length=1000, blank=True,
                                 null=True, default=None)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     total_price = models.DecimalField(max_digits=10,
                                       decimal_places=2, default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
+    address = models.CharField(max_length=300)
+    phone = models.CharField(max_length=11)
+    is_delivery = models.BooleanField(default=True)
+    user_name = models.CharField(max_length=100)
 
     def __str__(self):
         return f'Заказ №{self.id}'

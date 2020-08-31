@@ -8,20 +8,23 @@
 <script>
 import CafeInfo from "./CafeInfo";
 import CafePromo from "./CafePromo";
+import { mapActions } from "vuex";
 export default {
   name: "Cafe",
-  data() {
-    return {
-      //  брать из api как доделаю его
-      promoImages: [
-        "http://127.0.0.1:8000/media/promo/dr.png",
-        "http://127.0.0.1:8000/media/promo/mikedowntown.png"
-      ]
-    };
-  },
   components: {
     CafeInfo,
     CafePromo
+  },
+  computed: {
+    promoImages() {
+      return this.$store.state.promo;
+    }
+  },
+  methods: {
+    ...mapActions(["getPromoImages"])
+  },
+  created() {
+    this.$store.dispatch("getPromoImages");
   }
 };
 </script>
@@ -41,22 +44,24 @@ export default {
 .cafe__promo {
   width: 60%;
   min-width: 380px;
-  height: 60%;
 }
 @media screen and (max-width: 1080px) {
   .cafe__info {
     width: 100%;
     min-width: 600px;
   }
-}
-@media screen and (max-width: 960px) {
   .cafe__promo {
-    max-height: 200px;
+    width: 80%;
+    height: auto;
   }
 }
+
 @media screen and (max-width: 600px) {
   .cafe__info {
     display: none;
+  }
+  .cafe__promo {
+    max-height: 200px;
   }
 }
 </style>

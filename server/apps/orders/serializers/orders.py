@@ -6,7 +6,7 @@ from apps.orders.models import Order, DishInOrder
 class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
-        fields = 'id', 'comments', 'status', 'user', 'total_price'
+        fields = 'id', 'comment', 'status', 'user', 'total_price', 'address', 'phone', 'is_delivery', 'user_name'
         extra_kwargs = {'user': {'read_only': True},
                         'total_price': {'read_only': True}}
 

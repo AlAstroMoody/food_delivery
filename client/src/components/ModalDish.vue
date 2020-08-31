@@ -13,7 +13,7 @@
           <div class="modal__description">
             {{ dish.description }}
           </div>
-          <span class="modal__info">
+          <span class="modal__info" v-if="dish.weight > 0">
             <img src="../assets/item_weight.png" />
             {{ dish.weight }} гр
           </span>
@@ -43,25 +43,28 @@ export default {
 
 <style scoped>
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   top: 0;
   right: 0;
-  bottom: -99999%;
   left: 0;
   background: rgba(62, 62, 62, 0.4);
   z-index: 999;
   min-width: 350px;
+  bottom: -99999%;
 }
 
 .modal__body {
   display: flex;
 }
 .modal__left {
+  display: flex;
   width: 50%;
+  background-color: #eee;
 }
+.modal__image {
+  margin: auto;
+}
+
 .modal__right {
   display: flex;
   flex-direction: column;
@@ -102,10 +105,7 @@ export default {
   text-align: right;
   padding-top: 20px;
 }
-.modal__image {
-  width: 100%;
-  height: auto;
-}
+
 .modal__info {
   margin-left: 5%;
 }

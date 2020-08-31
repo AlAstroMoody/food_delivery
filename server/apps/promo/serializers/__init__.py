@@ -1,0 +1,2 @@
+from .promo import PromoSerializer
+

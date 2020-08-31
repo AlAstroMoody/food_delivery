@@ -33,7 +33,7 @@ def add_dishes(apps, schema_editor):
                                        price=row[1], description=row[5],
                                        weight=row[6])
 
-            # загружаем в модель изображения из url
+            # загружаем в модель изображения по ссылкам
             response = requests.get(row[3])
             response_big = requests.get(row[2])
             name = urlparse(row[3]).path.split('/')[-1]

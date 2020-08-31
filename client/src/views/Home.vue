@@ -114,6 +114,11 @@ export default {
   min-width: 190px;
   margin-bottom: 2%;
 }
+.home__modal-dish {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media screen and (max-width: 1370px) {
   .home__menu {
     width: 80%;

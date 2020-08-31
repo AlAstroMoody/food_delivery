@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { getDishes } from "@/api/dishes";
+import { getPromo } from "@/api/promo";
 import createPersistedState from "vuex-persistedstate";
 import { authUser, registerUser } from "@/api/users";
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
         username: ""
       }
     },
-    statusAuth: false
+    statusAuth: false,
+    promo: []
   },
   mutations: {
     SET_DISHES: (state, dishes) => {
@@ -63,6 +65,9 @@ export default new Vuex.Store({
     },
     ERROR(state) {
       state.statusAuth = false;
+    },
+    SET_PROMO_IMAGES: (state, promo) => {
+      state.promo = promo;
     }
   },
   actions: {
@@ -92,6 +97,9 @@ export default new Vuex.Store({
       } catch {
         commit("ERROR");
       }
+    },
+    async getPromoImages({ commit }) {
+      commit("SET_PROMO_IMAGES", await getPromo());
     }
   },
   modules: {},

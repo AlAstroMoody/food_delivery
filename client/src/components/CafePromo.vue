@@ -3,10 +3,10 @@
     <el-carousel indicator-position="outside">
       <el-carousel-item
         v-for="image in images"
-        :key="image"
+        :key="image.id"
         class="cafe-promo__container"
       >
-        <img :src="image" class="cafe-promo__image" />
+        <img :src="image.image" class="cafe-promo__image" />
       </el-carousel-item>
     </el-carousel>
   </el-card>
@@ -30,21 +30,18 @@ export default {
 }
 .cafe-promo__container {
   display: flex;
-  justify-content: center;
 }
 .cafe-promo__image {
   width: 100%;
-  height: auto;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  margin: auto;
+  position: relative;
+  top: -8%;
 }
-@media screen and (max-width: 960px) {
+
+@media screen and (max-width: 600px) {
   .cafe-promo__image {
-    top: 30%;
+    position: relative;
+    top: -20%;
   }
 }
 </style>

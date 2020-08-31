@@ -11,7 +11,7 @@ class DishInOrderInline(admin.TabularInline):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'created',
-                    'status', 'total_price', 'comments')
+                    'status', 'total_price', 'comment')
     inlines = [DishInOrderInline]
 
 
