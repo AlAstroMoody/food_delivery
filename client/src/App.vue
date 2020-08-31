@@ -23,7 +23,6 @@ export default {
   margin: 0;
   padding: 0;
   font-family: Roboto, FreeSans, sans-serif;
-  min-width: 960px;
   color: #000;
   -webkit-text-size-adjust: none;
 }

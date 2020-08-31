@@ -1,3 +1,1 @@
-from .dishes import Dish
-from .dishes import Category
-
+from .dishes import Dish, Category

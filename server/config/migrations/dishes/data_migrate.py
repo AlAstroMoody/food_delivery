@@ -30,7 +30,8 @@ def add_dishes(apps, schema_editor):
         for row in lst:
             category, _ = Category.objects.get_or_create(name=row[4])
             Dish.objects.get_or_create(name=row[0], category=category,
-                                       price=row[1], description=row[5], weight=row[6])
+                                       price=row[1], description=row[5],
+                                       weight=row[6])
 
             # загружаем в модель изображения из url
             response = requests.get(row[3])
@@ -39,7 +40,8 @@ def add_dishes(apps, schema_editor):
             name_big = urlparse(row[3]).path.split('/')[-1]
             dish = Dish.objects.get(name=row[0])
             dish.image.save(name, ContentFile(response.content), save=True)
-            dish.image_big.save(name_big, ContentFile(response_big.content), save=True)
+            dish.image_big.save(name_big,
+                                ContentFile(response_big.content), save=True)
 
 
 class Migration(migrations.Migration):

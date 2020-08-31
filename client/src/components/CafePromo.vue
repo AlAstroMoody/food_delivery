@@ -1,10 +1,10 @@
 <template>
   <el-card class="cafe-promo" :body-style="{ padding: '0px' }">
-    <el-carousel indicator-position="outside" class="cafe-promo__carousel">
+    <el-carousel indicator-position="outside">
       <el-carousel-item
         v-for="image in images"
         :key="image"
-        class="cafe-promo__carousel-item"
+        class="cafe-promo__container"
       >
         <img :src="image" class="cafe-promo__image" />
       </el-carousel-item>
@@ -26,18 +26,25 @@ export default {
 
 <style scoped>
 .cafe-promo {
-  width: 80%;
-  height: 100%;
-  border-radius: 3%;
+  border-radius: 10px;
 }
-
-.cafe-promo__carousel-item {
-  font-size: 18px;
-  line-height: 300px;
-  margin: 0;
-  width: 100%;
+.cafe-promo__container {
+  display: flex;
+  justify-content: center;
 }
 .cafe-promo__image {
   width: 100%;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+@media screen and (max-width: 960px) {
+  .cafe-promo__image {
+    top: 30%;
+  }
 }
 </style>

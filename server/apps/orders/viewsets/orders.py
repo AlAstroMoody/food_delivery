@@ -6,7 +6,8 @@ from apps.orders.models import Order, DishInOrder
 from apps.orders.serializers import OrderSerializer, DishInOrderSerializer
 
 
-class OrderViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
+class OrderViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
+                   mixins.RetrieveModelMixin, GenericViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 

@@ -44,8 +44,7 @@ export default {
 <style scoped>
 .dish {
   display: flex;
-  min-width: 200px;
-  width: 95%;
+  width: 90%;
   min-height: 300px;
   border-radius: 6%;
   text-align: center;
@@ -58,15 +57,10 @@ export default {
   position: relative;
 }
 .dish__footer-title {
-  font-size: 23px;
-  line-height: 1;
-  max-height: 69px;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 16px 0;
-  padding: 0 10px;
+  font-size: 21px;
   font-weight: lighter;
+  padding: 5px;
+  min-height: 120px;
 }
 .dish__footer-order {
   display: flex;
@@ -85,5 +79,24 @@ export default {
   font-size: 20px;
   color: white;
   box-shadow: 0 0 5px 0 rgba(252, 146, 33, 0.5);
+}
+@media screen and (max-width: 850px) {
+  .dish__footer-title {
+    font-size: 18px;
+  }
+  .dish__footer-order {
+    font-size: 18px;
+  }
+  .dish__footer-button {
+    font-size: 17px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .dish__footer-title {
+    font-size: 16px;
+  }
+  .dish__footer {
+    min-height: 100px;
+  }
 }
 </style>

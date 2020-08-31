@@ -127,11 +127,9 @@ FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o777
 if DEBUG:
     from .installed_apps import *
 
-
     def show_toolbar(request):
         from django.conf import settings
         return settings.DEBUG
-
 
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": show_toolbar,

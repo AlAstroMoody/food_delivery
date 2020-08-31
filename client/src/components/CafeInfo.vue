@@ -36,7 +36,21 @@ export default {
   text-align: left;
   font-size: 20px;
   line-height: 1.21;
-  padding: 3%;
-  width: 32%;
+  padding: 20px;
+}
+@media screen and (max-width: 1080px) {
+  .cafe-info {
+    flex-direction: row;
+    text-align: center;
+  }
+  .cafe-info__block-about {
+    width: 30%;
+  }
+  .cafe-info__block-map {
+    width: 35%;
+  }
+  .cafe-info__block-delivery {
+    width: 30%;
+  }
 }
 </style>

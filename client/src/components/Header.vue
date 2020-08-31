@@ -10,35 +10,44 @@
         <HeaderPhones title="Заказ столиков" phone="261-01-65" />
       </div>
       <div class="header__logo-container">
-        <img class="header__logo-img" src="../assets/logo.png" />
+        <img class="header__logo-img" src="../assets/logo.png" alt="logo" />
         <span class="header__logo-title">cafe &amp; bar</span>
       </div>
-      <div class="header__social">
-        <el-button class="header__social-button">
-          <img src="../assets/social_facebook.png" />
-        </el-button>
-        <el-button class="header__social-button">
-          <img src="../assets/social_instagram.png" />
-        </el-button>
-        <el-button class="header__social-button">
-          <img src="../assets/social_vk.png" />
-        </el-button>
-        <el-button class="header__social-button">
-          <img src="../assets/social_twitter.png" />
-        </el-button>
-      </div>
-      <div class="header__cart"></div>
+      <HeaderSocial class="header__social" />
     </div>
+    <el-tag v-if="Username" class="header__user" effect="dark" type="success">
+      <span> <i class="el-icon-user"></i> {{ Username }} </span>
+      <el-divider direction="vertical"></el-divider>
+      <el-link @click="Logout">
+        <span>Logout</span>
+      </el-link>
+    </el-tag>
     <div class="header__empty"></div>
   </el-menu>
 </template>
 
 <script>
 import HeaderPhones from "./HeaderPhones";
+import HeaderSocial from "./HeaderSocial";
 export default {
   name: "Header",
   components: {
-    HeaderPhones
+    HeaderPhones,
+    HeaderSocial
+  },
+  computed: {
+    Username() {
+      return this.$store.state.token.user.username;
+    }
+  },
+  methods: {
+    Logout() {
+      this.$store.dispatch("logout");
+      this.$notify({
+        title: "Вы вышли из акаунта",
+        type: "info"
+      });
+    }
   }
 };
 </script>
@@ -64,17 +73,21 @@ export default {
   display: flex;
   justify-content: space-around;
   text-align: start;
-  width: 1170px;
+  width: 70%;
   margin: 0 auto;
   height: 94px;
   position: relative;
 }
 .header__phones {
   display: flex;
+  width: 30%;
+}
+.header__logo-container {
+  width: 40%;
+  max-width: 277px;
 }
 .header__logo-img {
   background: url(../assets/logo.png) no-repeat;
-  width: 277px;
   height: 75px;
   filter: drop-shadow(1px 1px 0 #8ba442);
   top: 50%;
@@ -87,29 +100,52 @@ export default {
   font-size: 20px;
   color: #739900;
   bottom: -21px;
-  margin-left: -53px;
+  margin-left: -70px;
   letter-spacing: 1px;
   display: block;
   left: 50%;
   position: absolute;
 }
 
-.header__logo-container {
-  width: 277px;
-}
-
 .header__social {
   display: flex;
   position: relative;
+  width: 30%;
   height: 30%;
   margin-top: 5%;
-  justify-content: flex-end;
+  justify-content: center;
 }
-.header__social-button {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding: 0;
-  background: #c4f197;
+
+.header__user {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  margin-right: 20px;
+  font-size: 17px;
+}
+@media screen and (max-width: 1370px) {
+  .header__content {
+    width: 100%;
+  }
+  .header__user {
+    display: none;
+  }
+}
+@media screen and (max-width: 960px) {
+  .header__phones {
+    display: none;
+  }
+  .header__social {
+    display: none;
+  }
+  .header__logo-container {
+    width: 100%;
+  }
+  .header__content {
+    height: 50px;
+  }
+  .header__logo-img {
+    top: 10%;
+  }
 }
 </style>

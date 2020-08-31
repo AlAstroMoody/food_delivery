@@ -7,7 +7,8 @@ class OrderSerializer(ModelSerializer):
     class Meta:
         model = Order
         fields = 'id', 'comments', 'status', 'user', 'total_price'
-        extra_kwargs = {'user': {'read_only': True}, 'total_price': {'read_only': True}}
+        extra_kwargs = {'user': {'read_only': True},
+                        'total_price': {'read_only': True}}
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -18,6 +19,7 @@ class OrderSerializer(ModelSerializer):
 class DishInOrderSerializer(ModelSerializer):
     class Meta:
         model = DishInOrder
-        fields = 'id', 'dish', 'count', 'order', 'price_per_item', 'total_price'
+        fields = 'id', 'dish', 'count', 'order', \
+                 'price_per_item', 'total_price'
         extra_kwargs = {'price_per_item': {'read_only': True},
                         'total_price': {'read_only': True}}

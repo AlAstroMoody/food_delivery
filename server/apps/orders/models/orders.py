@@ -19,9 +19,11 @@ class Status(models.Model):
 
 class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    comments = models.TextField(max_length=1000, blank=True, null=True, default=None)
+    comments = models.TextField(max_length=1000, blank=True,
+                                null=True, default=None)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_price = models.DecimalField(max_digits=10,
+                                      decimal_places=2, default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
@@ -32,12 +34,17 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
+
 class DishInOrder(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Номер заказа')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,
+                              verbose_name='Номер заказа')
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
-    count = models.PositiveSmallIntegerField(default=1, verbose_name='Количество')
-    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    count = models.PositiveSmallIntegerField(default=1,
+                                             verbose_name='Количество')
+    price_per_item = models.DecimalField(max_digits=10,
+                                         decimal_places=2, default=0)
+    total_price = models.DecimalField(max_digits=10,
+                                      decimal_places=2, default=0)
 
     def __str__(self):
         return f'{self.dish.name} {self.count} шт.'

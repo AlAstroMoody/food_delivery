@@ -1,10 +1,15 @@
 <template>
   <div class="home">
-    <Cafe />
-    <ModalDish v-if="modalVisible" @showModal="showModal" :dish="dish" />
+    <Cafe class="home__cafe" />
+    <ModalDish
+      v-if="modalVisible"
+      @showModal="showModal"
+      :dish="dish"
+      class="home__modal-dish"
+    />
     <section class="home__main">
       <SlickBag
-        class="slick-bag"
+        class="home__slick-bag"
         :order="order"
         :dishes="dishes"
         @removeDishInOrder="removeDishInOrder"
@@ -43,7 +48,8 @@ export default {
     ...mapActions([
       "editOrder",
       "removeDishInOrder",
-      "decreaseQuantityInOrder"
+      "decreaseQuantityInOrder",
+      "getAllDishes"
     ]),
     showModal(dish) {
       this.modalVisible = !this.modalVisible;
@@ -66,6 +72,9 @@ export default {
     order() {
       return this.$store.state.order;
     }
+  },
+  created() {
+    this.$store.dispatch("getAllDishes");
   }
 };
 </script>
@@ -81,20 +90,49 @@ export default {
   width: 100%;
   justify-content: space-evenly;
 }
-.slick-bag {
+.home__slick-bag {
   width: 20%;
+  height: 100%;
+  min-height: 300px;
   border-radius: 10%;
   position: sticky;
+  min-width: 300px;
   top: 0;
+  left: 15%;
 }
 .home__menu {
   display: flex;
-  width: 70%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 60%;
   flex-wrap: wrap;
 }
 .home__menu-cards {
   display: flex;
   width: 30%;
-  margin-bottom: 5%;
+  min-width: 190px;
+  margin-bottom: 2%;
+}
+@media screen and (max-width: 1370px) {
+  .home__menu {
+    width: 80%;
+    justify-content: flex-end;
+  }
+  .home__slick-bag {
+    left: 5%;
+  }
+}
+@media screen and (max-width: 960px) {
+  .home__menu {
+    width: 100%;
+    justify-content: center;
+  }
+  .home__slick-bag {
+    display: none;
+  }
+}
+.home__cafe {
+  width: 80%;
 }
 </style>

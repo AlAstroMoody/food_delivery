@@ -125,6 +125,7 @@ export default {
   flex-wrap: wrap;
   margin: 1%;
   align-items: center;
+  justify-content: center;
 }
 .order-items__body-button {
   margin: 0 10px 0 10px;

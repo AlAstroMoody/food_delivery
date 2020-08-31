@@ -1,22 +1,22 @@
 <template>
-  <div class="modal">
-    <el-card
-      class="modal__card"
-      :body-style="{ padding: '0px' }"
-      v-on:click.self="close"
-    >
+  <div class="modal" @click.self="close">
+    <el-card class="modal__card" :body-style="{ padding: '0px' }">
       <div class="modal__body">
         <div class="modal__left">
-          <el-image :src="dish.image_big"></el-image>
+          <el-image :src="dish.image_big" class="modal__image"></el-image>
         </div>
         <div class="modal__right">
           <div class="modal__right-header">
             <h1 class="modal__title">{{ dish.name }}</h1>
-            <span @click="close">&#10006;</span>
+            <el-link @click="close" class="modal__close">&#10006;</el-link>
           </div>
           <div class="modal__description">
             {{ dish.description }}
           </div>
+          <span class="modal__info">
+            <img src="../assets/item_weight.png" />
+            {{ dish.weight }} гр
+          </span>
           <div class="modal__price">{{ dish.price }}₽</div>
         </div>
       </div>
@@ -49,9 +49,11 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: -99999%;
   left: 0;
   background: rgba(62, 62, 62, 0.4);
+  z-index: 999;
+  min-width: 350px;
 }
 
 .modal__body {
@@ -71,27 +73,54 @@ export default {
   top: 10%;
   position: fixed;
   width: 60%;
-
-  min-width: 300px;
+  min-width: 380px;
   z-index: 10;
-  border-radius: 5%;
+  border-radius: 10px;
 }
 .modal__right-header {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 .modal__description {
   height: 70%;
-  font-size: 25px;
+  font-size: 17px;
+  color: gray;
   padding: 2%;
 }
 .modal__price {
   color: orange;
-  font-size: 30px;
-  text-align: center;
+  font-size: 23px;
+  margin: 5%;
 }
 .modal__title {
   width: 80%;
+  font-size: 23px;
+}
+.modal__close {
+  width: 10%;
+  text-align: right;
+  padding-top: 20px;
+}
+.modal__image {
+  width: 100%;
+  height: auto;
+}
+.modal__info {
+  margin-left: 5%;
+}
+@media screen and (max-width: 960px) {
+  .modal__title {
+    font-size: 15px;
+  }
+  .modal__price {
+    font-size: 15px;
+  }
+  .modal__description {
+    font-size: 12px;
+  }
+  .modal__info {
+    font-size: 12px;
+  }
 }
 </style>

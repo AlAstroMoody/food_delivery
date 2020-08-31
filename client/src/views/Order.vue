@@ -1,5 +1,11 @@
 <template>
   <div class="order">
+    <el-page-header
+      @back="goBack"
+      content="Оформление заказа"
+      title="На главную страницу"
+    >
+    </el-page-header>
     <OrderItems
       :order="order"
       :dishes="dishes"
@@ -35,7 +41,11 @@
         @signIn="registerUser"
       />
     </el-card>
-    <ClientInfo class="order__client-info" @createOrder="createOrder" />
+    <ClientInfo
+      class="order__client-info"
+      @createOrder="createOrder"
+      v-if="statusAuth"
+    />
   </div>
 </template>
 
@@ -62,6 +72,9 @@ export default {
     ClientInfo
   },
   methods: {
+    goBack() {
+      this.$router.push({ name: "Home" });
+    },
     async registerUser(formData) {
       await this.$store.dispatch("registerNewUser", formData);
     },
@@ -69,26 +82,35 @@ export default {
       await this.$store.dispatch("signIn", formData);
     },
     async createOrder(formData) {
-      await addOrder(formData).then(
-        response => (this.order_id = response["id"])
-      );
-      if (this.order_id) {
-        for (let position of this.order) {
-          let dishesFormData = new FormData();
-          dishesFormData.set("dish", position[0]);
-          dishesFormData.set("count", position[1]);
-          dishesFormData.set("order", this.order_id);
-          await addDishesToOrder(dishesFormData);
-        }
-        await getOrder(this.order_id).then(
-          response => (this.orderInfo = response)
+      if (this.order.length > 0) {
+        await addOrder(formData).then(
+          response => (this.order_id = response["id"])
         );
-        this.$notify.info({
-          title: "Заказ №" + this.orderInfo["id"],
-          message:
-            "на сумму" + this.orderInfo["total_price"] + " отдан в работу!"
-        });
-        //  очистить order на фронте
+        if (this.order_id) {
+          for (let position of this.order) {
+            let dishesFormData = new FormData();
+            dishesFormData.set("dish", position[0]);
+            dishesFormData.set("count", position[1]);
+            dishesFormData.set("order", this.order_id);
+            await addDishesToOrder(dishesFormData);
+          }
+          await getOrder(this.order_id).then(
+            response => (this.orderInfo = response)
+          );
+          this.$notify.info({
+            title: "Заказ №" + this.orderInfo["id"],
+            message:
+              "на сумму " + this.orderInfo["total_price"] + " отдан в работу!"
+          });
+          if (this.orderInfo["id"]) {
+            this.$store.state.order = [];
+            this.goBack();
+          } else {
+            this.$notify.info({
+              message: "Произошла непредвиденная ошибка"
+            });
+          }
+        }
       }
     },
     ...mapActions([
@@ -135,12 +157,15 @@ export default {
 .orderItems {
   width: 50%;
   font-size: 25px;
+  min-width: 300px;
 }
 .order__is-auth {
   text-align: center;
   width: 30%;
+  min-width: 300px;
 }
 .order__client-info {
-  width: 40%;
+  width: 30%;
+  min-width: 300px;
 }
 </style>

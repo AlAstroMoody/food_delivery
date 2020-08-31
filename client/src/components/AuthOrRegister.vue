@@ -126,7 +126,6 @@ export default {
         let formData = new FormData();
         formData.set("username", this.login);
         formData.set("password", this.password);
-        console.log("OK");
         this.$emit("signIn", formData);
       }
     }
