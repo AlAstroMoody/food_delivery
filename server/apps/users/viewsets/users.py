@@ -4,7 +4,8 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from apps.users.serializers.users import RegisterSerializer
+from apps.profile.models import Profile
+from apps.users.serializers import RegisterSerializer
 
 
 class RegisterViewSet(CreateModelMixin, GenericViewSet):
@@ -15,6 +16,8 @@ class RegisterViewSet(CreateModelMixin, GenericViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         token = Token.objects.create(user=serializer.instance)
+        print(serializer.instance.id)
+        Profile.objects.get_or_create(user=serializer.instance)
         return Response({
             'token': token.key,
             'user': {

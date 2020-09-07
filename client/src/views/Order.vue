@@ -6,7 +6,7 @@
       title="На главную страницу"
     >
     </el-page-header>
-    <OrderItems
+    <order-items
       :order="order"
       :dishes="dishes"
       @addToOrder="addToOrder"
@@ -27,21 +27,21 @@
         inactive-text="Регистрация"
       >
       </el-switch>
-      <AuthOrRegister
+      <auth-or-register
         v-if="authorization"
         title="Авторизация"
         buttonTitle="Войти"
         auth
         @signIn="signIn"
       />
-      <AuthOrRegister
+      <auth-or-register
         v-if="!authorization"
         title="Регистрация"
         buttonTitle="Зарегистрироваться"
         @signIn="registerUser"
       />
     </el-card>
-    <ClientInfo
+    <client-info
       class="order__client-info"
       @createOrder="createOrder"
       v-if="statusAuth"

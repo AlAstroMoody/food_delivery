@@ -17,6 +17,7 @@ LOCAL_APPS = [
   'apps.users',
   'apps.orders',
   'apps.promo',
+  'apps.profile',
 ]
 
 INSTALLED_APPS += LOCAL_APPS

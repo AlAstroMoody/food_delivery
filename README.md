@@ -40,4 +40,8 @@
 `fab dev` - запуск
 
 `fab migrate` - применить миграции  
-`fab createsuperuser` - создать супер пользователя
+`fab createsuperuser` - создать супер пользователя  
+####Главная страница от 07.09:
+![главная страница](screenshots/first.png )​
+####Cтраница оформления заказа от 07.09:
+![страница заказа](screenshots/second.png )​

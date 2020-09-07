@@ -4,7 +4,7 @@
     <div class="slick-bag__body" v-if="order.length === 0">
       Нажмите «ЗАКАЗАТЬ» чтобы товар добавился к заказу.
     </div>
-    <OrderItems
+    <order-items
       :order="order"
       :dishes="dishes"
       @addToOrder="addToOrder"

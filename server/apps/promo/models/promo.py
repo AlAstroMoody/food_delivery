@@ -8,6 +8,7 @@ class Promo(models.Model):
     class Meta:
         verbose_name = 'Изображение на слайдер'
         verbose_name_plural = 'Изображения на слайдер'
+        ordering = ('id',)
 
     def __str__(self):
         return self.name

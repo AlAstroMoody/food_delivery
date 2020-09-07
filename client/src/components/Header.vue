@@ -2,7 +2,7 @@
   <el-menu class="header" mode="horizontal">
     <div class="header__content">
       <div class="header__phones">
-        <HeaderPhones
+        <header-phones
           title="Телефон доставки"
           phone="226-65-65"
           :delivery="true"
@@ -13,10 +13,13 @@
         <img class="header__logo-img" src="../assets/logo.png" alt="logo" />
         <span class="header__logo-title">cafe &amp; bar</span>
       </div>
-      <HeaderSocial class="header__social" />
+      <header-social class="header__social" />
     </div>
     <el-tag v-if="Username" class="header__user" effect="dark" type="success">
-      <span> <i class="el-icon-user"></i> {{ Username }} </span>
+      <span>
+        <i class="el-icon-user" />
+        <router-link :to="{ name: 'Profile' }"> {{ Username }} </router-link>
+      </span>
       <el-divider direction="vertical"></el-divider>
       <el-link @click="Logout">
         <span>Logout</span>

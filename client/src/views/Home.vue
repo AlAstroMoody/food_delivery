@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <Cafe class="home__cafe" />
-    <ModalDish
+    <modal-dish
       v-if="modalVisible"
       @showModal="showModal"
       :dish="dish"
       class="home__modal-dish"
     />
     <section class="home__main">
-      <SlickBag
+      <slick-bag
         class="home__slick-bag"
         :order="order"
         :dishes="dishes"

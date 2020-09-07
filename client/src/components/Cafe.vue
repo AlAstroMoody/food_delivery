@@ -1,7 +1,7 @@
 <template>
   <div class="cafe">
-    <CafeInfo class="cafe__info" />
-    <CafePromo :images="promoImages" class="cafe__promo" />
+    <cafe-info class="cafe__info" />
+    <cafe-promo :images="promoImages" class="cafe__promo" />
   </div>
 </template>
 

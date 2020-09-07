@@ -1,8 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Order from "../views/Order.vue";
-import Delivery from "../views/Delivery.vue";
+import Home from "@/views/Home.vue";
+import Order from "@/views/Order.vue";
+import Delivery from "@/views/Delivery.vue";
+import Profile from "@/views/Profile";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/delivery/",
     name: "Delivery",
     component: Delivery
+  },
+  {
+    path: "/profile/",
+    name: "Profile",
+    component: Profile
   }
 ];
 
