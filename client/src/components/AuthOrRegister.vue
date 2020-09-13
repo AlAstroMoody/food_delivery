@@ -134,8 +134,6 @@ export default {
 </script>
 
 <style scoped>
-.authorization {
-}
 .authorization__body {
   display: flex;
   flex-direction: column;

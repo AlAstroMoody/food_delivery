@@ -29,7 +29,7 @@ export default {
         return this.value;
       },
       set(value) {
-        this.$emit("returnText", value);
+        this.$emit("update:value", value);
       }
     }
   }

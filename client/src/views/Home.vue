@@ -1,24 +1,25 @@
 <template>
   <div class="home">
-    <Cafe class="home__cafe" />
-    <modal-dish
-      v-if="modalVisible"
-      @showModal="showModal"
-      :dish="dish"
-      class="home__modal-dish"
-    />
+    <about-cafe class="home__cafe" />
+    <transition name="fade">
+      <modal-dish
+        v-if="modalVisible"
+        @showModal="showModal"
+        :dish="dish"
+        class="home__modal-dish"
+      />
+    </transition>
     <section class="home__main">
       <slick-bag
         class="home__slick-bag"
         :order="order"
-        :dishes="dishes"
         @removeDishInOrder="removeDishInOrder"
         @addToOrder="addToOrder"
         @decreaseQuantityInOrder="decreaseQuantityInOrder"
       />
       <section class="home__menu">
         <div v-for="dish in dishes" :key="dish.id" class="home__menu-cards">
-          <DishCard
+          <dish-card
             :dish="dish"
             @addToOrder="addToOrder"
             @showModal="showModal"
@@ -30,7 +31,7 @@
 </template>
 
 <script>
-import Cafe from "../components/Cafe";
+import AboutCafe from "../components/AboutCafe";
 import DishCard from "../components/DishCard";
 import SlickBag from "../components/SlickBag";
 import ModalDish from "../components/ModalDish";
@@ -43,7 +44,7 @@ export default {
       dish: {}
     };
   },
-  components: { Cafe, DishCard, SlickBag, ModalDish },
+  components: { AboutCafe, DishCard, SlickBag, ModalDish },
   methods: {
     ...mapActions([
       "editOrder",
@@ -56,13 +57,24 @@ export default {
       this.dish = dish;
     },
     addToOrder(id) {
-      this.$store.dispatch("editOrder", id);
+      this.$store.dispatch("editOrder", this.getDishById(id));
     },
     removeDishInOrder(id) {
-      this.$store.dispatch("removeDishInOrder", id);
+      this.$store.dispatch("removeDishInOrder", this.getDishById(id));
     },
     decreaseQuantityInOrder(id) {
-      this.$store.dispatch("decreaseQuantityInOrder", id);
+      this.$store.dispatch("decreaseQuantityInOrder", this.getDishById(id));
+    },
+    getDishById(id) {
+      for (let i = 0; i < this.dishes.length; i++) {
+        if (this.dishes[i]["id"] === id) {
+          return {
+            id: id,
+            name: this.dishes[i]["name"],
+            price: this.dishes[i]["price"]
+          };
+        }
+      }
     }
   },
   computed: {
@@ -139,5 +151,17 @@ export default {
 }
 .home__cafe {
   width: 80%;
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 0.4s;
+}
+.fade-leave-active {
+  transition: opacity 0.4s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

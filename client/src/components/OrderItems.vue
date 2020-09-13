@@ -2,33 +2,33 @@
   <el-card class="order-items" :body-style="{ padding: '0px' }">
     <h1 class="order-items__title" v-if="title">{{ title }}</h1>
     <el-main class="order-items__body">
-      <div v-for="dish in order" :key="dish[0]" class="order-items__cycle">
+      <div v-for="item in order" :key="item.id" class="order-items__cycle">
         <div class="order-items__body-dishes">
-          <div class="order-items__body-title">{{ showDishName(dish[0]) }}</div>
+          <div class="order-items__body-title">{{ item.name }}</div>
           <div class="order-items__body-action">
             <el-button
               circle
-              @click="removeDish(dish[0])"
-              v-if="dish[1] === 1"
+              @click="removeDish(item.id)"
+              v-if="item.count === 1"
               class="order-items__body-button"
               icon="el-icon-close"
             />
             <el-button
               circle
-              @click="minusDish(dish[0])"
-              v-if="dish[1] > 1"
+              @click="minusDish(item.id)"
+              v-if="item.count > 1"
               class="order-items__body-button"
               icon="el-icon-minus"
             />
-            {{ dish[1] }} шт.
+            {{ item.count }} шт.
             <el-button
               circle
-              @click="plusDish(dish[0])"
+              @click="plusDish(item.id)"
               icon="el-icon-plus"
               class="order-items__body-button"
             />
             <div class="order-items__body-price">
-              <i>{{ showDishPrice(dish[0]) * dish[1] }}₽</i>
+              <i>{{ item.price * item.count }}₽</i>
             </div>
           </div>
         </div>
@@ -37,9 +37,7 @@
     <div class="order-items__footer">
       <div>
         Сумма заказа:
-        <span class="order-items__footer-price">
-          {{ priceCalculation() }}₽</span
-        >
+        <span class="order-items__footer-price"> {{ totalPrice }}₽ </span>
       </div>
       <span v-if="footerInfo">{{ footerInfo }}</span>
     </div>
@@ -49,11 +47,12 @@
 <script>
 export default {
   name: "OrderItems",
+  data() {
+    return {
+      priceClass: ""
+    };
+  },
   props: {
-    dishes: {
-      type: Array,
-      default: () => []
-    },
     order: {
       type: Array,
       default: () => []
@@ -67,32 +66,18 @@ export default {
       default: ""
     }
   },
+  computed: {
+    totalPrice: {
+      get() {
+        return this.order.reduce(function(result, item) {
+          return result + item.count * item.price;
+        }, 0);
+      }
+    }
+  },
   methods: {
     removeDish(id) {
       this.$emit("removeDishInOrder", id);
-    },
-    showDishName(id) {
-      for (let dish of this.dishes) {
-        if (dish.id === id) {
-          return dish.name;
-        }
-      }
-    },
-    showDishPrice(id) {
-      for (let dish of this.dishes) {
-        if (dish.id === id) {
-          return dish.price;
-        }
-      }
-    },
-    priceCalculation() {
-      let totalPrice = 0;
-      for (let position of this.order) {
-        totalPrice +=
-          this.dishes.find(original => original.id === position[0]).price *
-          position[1];
-      }
-      return totalPrice;
     },
     plusDish(id) {
       this.$emit("addToOrder", id);
@@ -127,19 +112,23 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .order-items__body-button {
   margin: 0 10px 0 10px;
 }
+
 .order-items__body-title {
   text-align: left;
   width: 50%;
   min-width: 250px;
 }
+
 .order-items__body-price {
   color: orange;
   text-align: left;
   width: 20%;
 }
+
 .order-items__body-action {
   display: flex;
   justify-content: space-between;
@@ -147,6 +136,7 @@ export default {
   width: 50%;
   min-width: 250px;
 }
+
 .order-items__footer {
   display: flex;
   flex-direction: column;
@@ -156,12 +146,14 @@ export default {
   justify-content: space-between;
   margin: 2%;
 }
+
 .order-items__footer-price {
   color: orange;
   font-size: 35px;
   border-bottom: 1px solid #999999;
   margin-right: 20px;
 }
+
 .order-items__cycle {
   border-bottom: 1px solid #999999;
 }

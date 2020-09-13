@@ -6,7 +6,6 @@
     </div>
     <order-items
       :order="order"
-      :dishes="dishes"
       @addToOrder="addToOrder"
       @decreaseQuantityInOrder="decreaseQuantityInOrder"
       @removeDishInOrder="removeDishInOrder"
@@ -31,10 +30,6 @@ export default {
   name: "SlickBag",
   components: { OrderItems },
   props: {
-    dishes: {
-      type: Array,
-      default: () => []
-    },
     order: {
       type: Array,
       default: () => []

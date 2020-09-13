@@ -22,7 +22,7 @@ export default {
   line-height: 1;
   margin: 0;
   padding: 0;
-  font-family: Roboto, FreeSans, sans-serif;
+  /*font-family: Roboto, FreeSans, sans-serif;*/
   color: #000;
   -webkit-text-size-adjust: none;
 }

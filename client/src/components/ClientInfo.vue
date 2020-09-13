@@ -3,21 +3,15 @@
     <form class="client-info__form">
       <input-field
         name="Как вас зовут?"
-        :value="profile.name"
+        :value.sync="profile.name"
         :pattern="/^[a-zA-Z ]{2,30}$/"
-        @returnValue="returnName"
       />
       <input-field
         name="Номер телефона"
-        :value="profile.phone"
+        :value.sync="profile.phone"
         pattern="/^[0-9]{11}$/"
-        @returnValue="returnPhone"
       />
-      <text-area-field
-        name="Комментарий к заказу"
-        :value="comment"
-        @returnText="returnComment"
-      />
+      <text-area-field name="Комментарий к заказу" :value.sync="comment" />
       <el-switch
         v-model="delivery"
         active-color="#13ce66"
@@ -28,18 +22,19 @@
         :width="60"
       >
       </el-switch>
-      <input-field
-        v-show="delivery"
-        name="Адрес доставки:"
-        :value="profile.address"
-        @returnValue="returnAddress"
-      />
-      <select-field
-        v-show="!delivery"
-        name="Адрес самовывоза:"
-        :options="options"
-        @returnValue="returnPlace"
-      />
+      <transition name="fade" mode="out-in">
+        <input-field
+          v-if="delivery"
+          name="Адрес доставки:"
+          :value.sync="profile.address"
+        />
+        <select-field
+          v-if="!delivery"
+          name="Адрес самовывоза:"
+          :options="options"
+          @returnValue="returnPlace"
+        />
+      </transition>
       <el-button
         type="primary"
         @click="onSubmit"
@@ -79,18 +74,6 @@ export default {
     inputField
   },
   methods: {
-    returnComment(comment) {
-      this.comment = comment;
-    },
-    returnName(name) {
-      this.profile.name = name;
-    },
-    returnPhone(phone) {
-      this.profile.phone = phone;
-    },
-    returnAddress(address) {
-      this.profile.address = address;
-    },
     returnPlace(address) {
       this.place = address;
     },
@@ -107,6 +90,7 @@ export default {
         formData.set("address", this.profile.address);
       } else {
         formData.set("is_delivery", false);
+        console.log(this.place);
         formData.set("address", this.place);
       }
       this.$emit("createOrder", formData);
@@ -134,5 +118,13 @@ export default {
 }
 .client-info__button {
   margin: auto;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

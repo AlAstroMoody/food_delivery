@@ -38,26 +38,31 @@ export default new Vuex.Store({
       state.order = order;
     },
     EDIT_ORDER: (state, payload) => {
-      const index = state.order.findIndex(original => original[0] === payload);
-      const dish = state.order.find(original => original[0] === payload);
+      const index = state.order.findIndex(
+        original => original["id"] === payload.id
+      );
       if (index === -1) {
-        state.order.push([payload, 1]);
+        state.order.push({
+          id: payload.id,
+          count: 1,
+          name: payload.name,
+          price: payload.price
+        });
       } else {
-        const count = dish.pop();
-        state.order.splice(index, 1, [payload, count + 1]);
+        state.order[index].count++;
       }
     },
     REMOVE_DISH_IN_ORDER: (state, payload) => {
-      const index = state.order.findIndex(original => original[0] === payload);
+      const index = state.order.findIndex(
+        original => original["id"] === payload.id
+      );
       state.order.splice(index, 1);
     },
     DECREASE_QUANTITY_DISH_IN_ORDER: (state, payload) => {
-      const index = state.order.findIndex(original => original[0] === payload);
-      const dish = state.order.find(original => original[0] === payload);
-      const count = dish.pop();
-      if (count > 1) {
-        state.order.splice(index, 1, [payload, count - 1]);
-      } else state.order.splice(index, 1);
+      const index = state.order.findIndex(
+        original => original["id"] === payload.id
+      );
+      state.order[index].count--;
     },
     AUTH_USER: (state, token) => {
       state.token = token;

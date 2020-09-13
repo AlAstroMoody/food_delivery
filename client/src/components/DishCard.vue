@@ -27,10 +27,9 @@ export default {
   },
   methods: {
     addToOrder(id) {
-      this.$notify({
+      this.$notify.success({
         title: this.dish.name,
-        message: "Добавлено в заказ",
-        type: "success"
+        message: "Добавлено в заказ"
       });
       this.$emit("addToOrder", id);
     },
@@ -56,12 +55,14 @@ export default {
   flex-direction: column;
   position: relative;
 }
+
 .dish__footer-title {
   font-size: 21px;
   font-weight: lighter;
   padding: 5px;
   min-height: 120px;
 }
+
 .dish__footer-order {
   display: flex;
   justify-content: space-around;
@@ -73,6 +74,7 @@ export default {
   width: 100%;
   bottom: 2%;
 }
+
 .dish__footer-button {
   background: orange;
   padding: 5%;
@@ -80,6 +82,7 @@ export default {
   color: white;
   box-shadow: 0 0 5px 0 rgba(252, 146, 33, 0.5);
 }
+
 @media screen and (max-width: 850px) {
   .dish__footer-title {
     font-size: 18px;
@@ -91,6 +94,7 @@ export default {
     font-size: 17px;
   }
 }
+
 @media screen and (max-width: 700px) {
   .dish__footer-title {
     font-size: 16px;

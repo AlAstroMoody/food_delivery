@@ -38,7 +38,8 @@ export default {
   line-height: 1.21;
   padding: 20px;
 }
-@media screen and (max-width: 1080px) {
+
+@media screen and (max-width: 1440px) {
   .cafe-info {
     flex-direction: row;
     text-align: center;

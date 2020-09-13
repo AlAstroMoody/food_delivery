@@ -50,17 +50,19 @@ export default {
   background: rgba(62, 62, 62, 0.4);
   z-index: 999;
   min-width: 350px;
-  bottom: -99999%;
+  bottom: -1840%;
 }
 
 .modal__body {
   display: flex;
 }
+
 .modal__left {
   display: flex;
   width: 50%;
   background-color: #eee;
 }
+
 .modal__image {
   margin: auto;
 }
@@ -71,6 +73,7 @@ export default {
   width: 50%;
   background-color: #eee;
 }
+
 .modal__card {
   display: flex;
   top: 10%;
@@ -80,26 +83,31 @@ export default {
   z-index: 10;
   border-radius: 10px;
 }
+
 .modal__right-header {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
 }
+
 .modal__description {
   height: 70%;
   font-size: 17px;
   color: gray;
   padding: 2%;
 }
+
 .modal__price {
   color: orange;
   font-size: 23px;
   margin: 5%;
 }
+
 .modal__title {
   width: 80%;
   font-size: 23px;
 }
+
 .modal__close {
   width: 10%;
   text-align: right;
@@ -109,16 +117,20 @@ export default {
 .modal__info {
   margin-left: 5%;
 }
+
 @media screen and (max-width: 960px) {
   .modal__title {
     font-size: 15px;
   }
+
   .modal__price {
     font-size: 15px;
   }
+
   .modal__description {
     font-size: 12px;
   }
+
   .modal__info {
     font-size: 12px;
   }

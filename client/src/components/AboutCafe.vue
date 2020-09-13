@@ -10,7 +10,7 @@ import CafeInfo from "./CafeInfo";
 import CafePromo from "./CafePromo";
 import { mapActions } from "vuex";
 export default {
-  name: "Cafe",
+  name: "AboutCafe",
   components: {
     CafeInfo,
     CafePromo
@@ -37,22 +37,27 @@ export default {
   margin: 1%;
   height: auto;
 }
+
 .cafe__info {
   width: 30%;
   min-width: 300px;
 }
+
 .cafe__promo {
   width: 60%;
-  min-width: 380px;
+  min-width: 740px;
 }
-@media screen and (max-width: 1080px) {
+
+@media screen and (max-width: 1440px) {
   .cafe__info {
     width: 100%;
     min-width: 600px;
   }
+}
+
+@media screen and (max-width: 800px) {
   .cafe__promo {
-    width: 80%;
-    height: auto;
+    min-width: 600px;
   }
 }
 
@@ -61,7 +66,9 @@ export default {
     display: none;
   }
   .cafe__promo {
-    max-height: 200px;
+    width: 90%;
+    min-width: 350px;
+    height: 200px;
   }
 }
 </style>

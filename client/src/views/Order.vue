@@ -8,7 +8,6 @@
     </el-page-header>
     <order-items
       :order="order"
-      :dishes="dishes"
       @addToOrder="addToOrder"
       @decreaseQuantityInOrder="decreaseQuantityInOrder"
       @removeDishInOrder="removeDishInOrder"
@@ -27,19 +26,21 @@
         inactive-text="Регистрация"
       >
       </el-switch>
-      <auth-or-register
-        v-if="authorization"
-        title="Авторизация"
-        buttonTitle="Войти"
-        auth
-        @signIn="signIn"
-      />
-      <auth-or-register
-        v-if="!authorization"
-        title="Регистрация"
-        buttonTitle="Зарегистрироваться"
-        @signIn="registerUser"
-      />
+      <transition name="fade" mode="out-in">
+        <auth-or-register
+          v-if="authorization"
+          title="Авторизация"
+          buttonTitle="Войти"
+          auth
+          @signIn="signIn"
+        />
+        <auth-or-register
+          v-if="!authorization"
+          title="Регистрация"
+          buttonTitle="Зарегистрироваться"
+          @signIn="registerUser"
+        />
+      </transition>
     </el-card>
     <client-info
       class="order__client-info"
@@ -85,10 +86,10 @@ export default {
       if (this.order.length > 0) {
         await addOrder(formData).then(response => (this.newOrder = response));
         if (this.newOrder["id"]) {
-          for (let position of this.order) {
+          for (let item of this.order) {
             let dishesFormData = new FormData();
-            dishesFormData.set("dish", position[0]);
-            dishesFormData.set("count", position[1]);
+            dishesFormData.set("dish", item.id);
+            dishesFormData.set("count", item.count);
             dishesFormData.set("order", this.newOrder["id"]);
             await addDishesToOrder(dishesFormData);
           }
@@ -96,10 +97,8 @@ export default {
             response => (this.orderInfo = response)
           );
           this.$notify.info({
-            title:
-              this.newOrder["user_name"] + ", заказ №" + this.orderInfo["id"],
-            message:
-              "на сумму " + this.orderInfo["total_price"] + " отдан в работу!"
+            title: `${this.newOrder["user_name"]}, заказ № ${this.orderInfo["id"]}`,
+            message: `на сумму ${this.orderInfo["total_price"]} отдан в работу!`
           });
           if (this.orderInfo["id"]) {
             this.$store.state.order = [];
@@ -117,25 +116,34 @@ export default {
       "removeDishInOrder",
       "decreaseQuantityInOrder"
     ]),
+    // задублированы функции с Home, исправить
     addToOrder(id) {
-      this.$store.dispatch("editOrder", id);
+      this.$store.dispatch("editOrder", this.getDishById(id));
     },
     removeDishInOrder(id) {
-      this.$store.dispatch("removeDishInOrder", id);
-      if (this.order.length === 0) {
-        this.$router.push({ name: "Home" });
-      }
+      this.$store.dispatch("removeDishInOrder", this.getDishById(id));
     },
     decreaseQuantityInOrder(id) {
-      this.$store.dispatch("decreaseQuantityInOrder", id);
+      this.$store.dispatch("decreaseQuantityInOrder", this.getDishById(id));
+    },
+    getDishById(id) {
+      for (let i = 0; i < this.dishes.length; i++) {
+        if (this.dishes[i]["id"] === id) {
+          return {
+            id: id,
+            name: this.dishes[i]["name"],
+            price: this.dishes[i]["price"]
+          };
+        }
+      }
     }
   },
   computed: {
-    dishes() {
-      return this.$store.state.dishes;
-    },
     order() {
       return this.$store.state.order;
+    },
+    dishes() {
+      return this.$store.state.dishes;
     },
     authOrRegister() {
       return this.authorization;
@@ -153,18 +161,31 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
 .orderItems {
   width: 50%;
   font-size: 25px;
   min-width: 350px;
 }
+
 .order__is-auth {
   text-align: center;
   width: 30%;
   min-width: 350px;
 }
+
 .order__client-info {
   width: 40%;
   min-width: 350px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
