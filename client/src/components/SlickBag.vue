@@ -62,17 +62,20 @@ export default {
   justify-content: space-between;
   text-align: center;
 }
+
 .slick-bag__header {
   padding: 4%;
   background: #e5e5e5;
   font-size: 35px;
   font-weight: 100;
 }
+
 .slick-bag__body {
   padding: 8%;
   font-size: 19px;
   border-bottom: 1px solid #e5e5e5;
 }
+
 .slick-bag__footer {
   display: flex;
   justify-content: center;

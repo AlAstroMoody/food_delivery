@@ -4,6 +4,8 @@ import Home from "@/views/Home.vue";
 import Order from "@/views/Order.vue";
 import Delivery from "@/views/Delivery.vue";
 import Profile from "@/views/Profile";
+import NotFoundComponent from "@/views/NotFoundComponent";
+import store from "@/store/index";
 
 Vue.use(VueRouter);
 
@@ -11,7 +13,11 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    beforeEnter(from, to, next) {
+      store.dispatch("getAllDishes");
+      next();
+    }
   },
   {
     path: "/order/",
@@ -27,7 +33,8 @@ const routes = [
     path: "/profile/",
     name: "Profile",
     component: Profile
-  }
+  },
+  { path: "*", component: NotFoundComponent }
 ];
 
 const router = new VueRouter({

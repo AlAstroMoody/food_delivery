@@ -4,12 +4,12 @@
       <input-field
         name="Как вас зовут?"
         :value.sync="profile.name"
-        :pattern="/^[a-zA-Z ]{2,30}$/"
+        :pattern="/^[a-zA-Zа-яА-Я]{2,30}$/"
       />
       <input-field
         name="Номер телефона"
         :value.sync="profile.phone"
-        pattern="/^[0-9]{11}$/"
+        :pattern="/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7}$/"
       />
       <text-area-field name="Комментарий к заказу" :value.sync="comment" />
       <el-switch
@@ -27,6 +27,7 @@
           v-if="delivery"
           name="Адрес доставки:"
           :value.sync="profile.address"
+          :pattern="/./"
         />
         <select-field
           v-if="!delivery"
@@ -57,15 +58,21 @@ export default {
   data() {
     return {
       comment: "",
-      delivery: "",
+      delivery: true,
       place: "",
-      formValid: true,
       options: [CENTER, VZLETKA]
     };
   },
   computed: {
     profile() {
       return this.$store.state.profile;
+    },
+    formValid() {
+      return (
+        this.profile.name &&
+        this.profile.phone &&
+        (this.profile.address || this.place)
+      );
     }
   },
   components: {
@@ -107,22 +114,27 @@ export default {
   font-weight: 100;
   margin: 0 5px;
 }
+
 .client-info__form {
   display: flex;
   flex-direction: column;
   margin: 2%;
 }
+
 .client-info__switch {
   margin: auto;
   padding: 10px;
 }
+
 .client-info__button {
   margin: auto;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;

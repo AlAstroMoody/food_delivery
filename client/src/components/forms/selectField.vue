@@ -58,10 +58,12 @@ export default {
   align-items: center;
   margin: 1%;
 }
+
 .field__label {
   width: 30%;
   min-width: 140px;
 }
+
 .field__input {
   width: 65%;
   min-width: 190px;

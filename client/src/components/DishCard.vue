@@ -1,15 +1,14 @@
 <template>
   <el-card class="dish" :body-style="{ padding: '0px' }" shadow="hover">
-    <el-image :src="dish.image" class="dish__image" @click="showModal" />
+    <div class="dish__header">
+      <el-image :src="dish.image" class="dish__image" @click="showModal" />
+    </div>
     <div class="dish__footer">
-      <h1 class="dish__footer-title">{{ dish.name }}</h1>
-      <div class="dish__footer-order">
+      <h1 class="dish__title">{{ dish.name }}</h1>
+      <div class="dish__order">
         {{ dish.price }}₽
-        <el-button
-          round
-          class="dish__footer-button"
-          @click="addToOrder(dish.id)"
-          >Заказать
+        <el-button round class="dish__button" @click="addToOrder(dish.id)">
+          Заказать
         </el-button>
       </div>
     </div>
@@ -43,10 +42,20 @@ export default {
 <style scoped>
 .dish {
   display: flex;
-  width: 90%;
-  min-height: 300px;
+  width: 100%;
   border-radius: 6%;
   text-align: center;
+  justify-content: center;
+}
+.dish__header {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.dish__image {
+  margin: auto;
+  width: 100%;
 }
 
 .dish__footer {
@@ -56,14 +65,14 @@ export default {
   position: relative;
 }
 
-.dish__footer-title {
+.dish__title {
   font-size: 21px;
   font-weight: lighter;
   padding: 5px;
   min-height: 120px;
 }
 
-.dish__footer-order {
+.dish__order {
   display: flex;
   justify-content: space-around;
   font-size: 25px;
@@ -75,7 +84,7 @@ export default {
   bottom: 2%;
 }
 
-.dish__footer-button {
+.dish__button {
   background: orange;
   padding: 5%;
   font-size: 20px;
@@ -83,6 +92,14 @@ export default {
   box-shadow: 0 0 5px 0 rgba(252, 146, 33, 0.5);
 }
 
+@media screen and (max-width: 1400px) {
+  .dish__header {
+    min-height: 50%;
+    max-height: 60%;
+
+    min-width: 250px;
+  }
+}
 @media screen and (max-width: 850px) {
   .dish__footer-title {
     font-size: 18px;

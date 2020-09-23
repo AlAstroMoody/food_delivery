@@ -1,5 +1,22 @@
 <template>
   <div class="home">
+    <div class="home__filters">
+<!--      <el-button type="text" v-for="dish in queryDishes" :key="dish" class="home__filters-button">-->
+<!--        {{dish.type}}-->
+<!--      </el-button>-->
+      <el-button type="text" class="home__filters-button"> Все блюда</el-button>
+      <el-button type="text" class="home__filters-button">Акции</el-button>
+      <el-button type="text" class="home__filters-button">Пицца</el-button>
+      <el-button type="text" class="home__filters-button">Паста</el-button>
+      <el-button type="text" class="home__filters-button">Основные блюда</el-button>
+      <el-button type="text" class="home__filters-button">Ризотто</el-button>
+      <el-button type="text" class="home__filters-button">Супы</el-button>
+      <el-button type="text" class="home__filters-button">Салаты</el-button>
+      <el-button type="text" class="home__filters-button">Закуски</el-button>
+      <el-button type="text" class="home__filters-button">Десерты</el-button>
+      <el-button type="text" class="home__filters-button">Напитки</el-button>
+      <el-input v-model="query" placeholder="поиск" />
+    </div>
     <about-cafe class="home__cafe" />
     <transition name="fade">
       <modal-dish
@@ -17,15 +34,19 @@
         @addToOrder="addToOrder"
         @decreaseQuantityInOrder="decreaseQuantityInOrder"
       />
-      <section class="home__menu">
-        <div v-for="dish in dishes" :key="dish.id" class="home__menu-cards">
+      <transition-group name="fade" class="home__menu">
+        <div
+          v-for="dish in queryDishes"
+          :key="dish.id"
+          class="home__menu-cards"
+        >
           <dish-card
             :dish="dish"
             @addToOrder="addToOrder"
             @showModal="showModal"
           />
         </div>
-      </section>
+      </transition-group>
     </section>
   </div>
 </template>
@@ -36,12 +57,14 @@ import DishCard from "../components/DishCard";
 import SlickBag from "../components/SlickBag";
 import ModalDish from "../components/ModalDish";
 import { mapActions } from "vuex";
+
 export default {
   name: "Home",
   data() {
     return {
       modalVisible: false,
-      dish: {}
+      dish: {},
+      query: ""
     };
   },
   components: { AboutCafe, DishCard, SlickBag, ModalDish },
@@ -83,10 +106,12 @@ export default {
     },
     order() {
       return this.$store.state.order;
+    },
+    queryDishes() {
+      return this.dishes.filter(item => {
+        return item.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
+      });
     }
-  },
-  created() {
-    this.$store.dispatch("getAllDishes");
   }
 };
 </script>
@@ -97,11 +122,24 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+.home__filters {
+  display: flex;
+  width: 60%;
+  background: white;
+  border-radius: 10px;
+  padding: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border: 1px solid #e5e5e5;
+}
 .home__main {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
 }
+
 .home__slick-bag {
   width: 20%;
   height: 100%;
@@ -109,9 +147,11 @@ export default {
   border-radius: 10%;
   position: sticky;
   min-width: 300px;
-  top: 0;
+  max-width: 400px;
+  top: 60px;
   left: 15%;
 }
+
 .home__menu {
   display: flex;
   justify-content: center;
@@ -120,24 +160,42 @@ export default {
   width: 60%;
   flex-wrap: wrap;
 }
+
 .home__menu-cards {
   display: flex;
   width: 30%;
   min-width: 190px;
-  margin-bottom: 2%;
+  min-height: 200px;
+  max-width: 300px;
+  margin: 1%;
 }
+
 .home__modal-dish {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-@media screen and (max-width: 1370px) {
+
+@media screen and (max-width: 1600px) {
   .home__menu {
     width: 80%;
     justify-content: flex-end;
   }
   .home__slick-bag {
+    left: 10%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .home__menu {
+    width: 100%;
+    justify-content: flex-end;
+    margin-left: 5%;
+  }
+  .home__slick-bag {
     left: 5%;
+  }
+  .home__menu-cards {
+    min-width: 250px;
   }
 }
 @media screen and (max-width: 960px) {
@@ -152,16 +210,26 @@ export default {
 .home__cafe {
   width: 80%;
 }
-.fade-enter {
-  opacity: 0;
-}
-.fade-enter-active {
-  transition: opacity 0.4s;
-}
+
+.fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.4s;
 }
+
+.fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.home__filters-button {
+  font-size: 16px;
+  margin: 3px;
+  padding: 3px;
+}
+
+.home__filters-button:hover {
+  background: #adcc52;
+  color: white;
+  transition: color 0.5s;
 }
 </style>

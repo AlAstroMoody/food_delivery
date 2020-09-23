@@ -125,6 +125,14 @@ export default new Vuex.Store({
       commit("PROFILE", await editProfile(id));
     }
   },
+  getters: {
+    dishes(state) {
+      return state.dishes;
+    },
+    dish: state => id => {
+      return state.dishes[id];
+    }
+  },
   modules: {},
   plugins: [createPersistedState()]
 });

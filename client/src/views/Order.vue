@@ -1,11 +1,5 @@
 <template>
   <div class="order">
-    <el-page-header
-      @back="goBack"
-      content="Оформление заказа"
-      title="На главную страницу"
-    >
-    </el-page-header>
     <order-items
       :order="order"
       @addToOrder="addToOrder"
@@ -73,9 +67,6 @@ export default {
     ClientInfo
   },
   methods: {
-    goBack() {
-      this.$router.push({ name: "Home" });
-    },
     async registerUser(formData) {
       await this.$store.dispatch("registerNewUser", formData);
     },

@@ -2,22 +2,29 @@
   <div class="cafe-info">
     <span class="cafe-info__block-about">
       <i class="el-icon-knife-fork" />
-      Мы — это <a href="/about/">уютное кафе</a> итальянской домашней кухни в
-      центре города
+      Мы — это
+      <router-link :to="{ name: 'About' }">уютное кафе</router-link> итальянской
+      домашней кухни в центре города
     </span>
     <span class="cafe-info__block-map">
       <i class="el-icon-location" />
       Наш адрес:
       <div class="cafe-info__address-link">
-        <a href="/map/?department=1"> ул.&nbsp;Диктатуры пролетариата, 32а</a>
+        <router-link :to="{ name: 'Delivery' }">
+          ул. Диктатуры пролетариата, 32а
+        </router-link>
       </div>
       <div class="cafe-info__address-link">
-        <a href="/map/?department=2">ул.&nbsp;Партизана Железняка, 26а</a>
+        <router-link :to="{ name: 'Delivery' }">
+          ул. Партизана Железняка, 26а
+        </router-link>
       </div>
     </span>
     <span class="cafe-info__block-delivery">
       <i class="el-icon-truck" />
-      <a href="/delivery/">Время работы и условия доставки</a>
+      <router-link :to="{ name: 'Delivery' }">
+        Время работы и условия доставки
+      </router-link>
     </span>
   </div>
 </template>

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
     <Footer />
   </div>
 </template>
@@ -26,4 +28,15 @@ export default {
   color: #000;
   -webkit-text-size-adjust: none;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 </style>

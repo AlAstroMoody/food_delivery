@@ -15,17 +15,26 @@
       </div>
       <header-social class="header__social" />
     </div>
-    <el-tag v-if="Username" class="header__user" effect="dark" type="success">
+    <el-tag v-if="username" class="header__user" effect="dark" type="success">
       <span>
         <i class="el-icon-user" />
-        <router-link :to="{ name: 'Profile' }"> {{ Username }} </router-link>
+        <router-link :to="{ name: 'Profile' }"> {{ username }} </router-link>
       </span>
       <el-divider direction="vertical"></el-divider>
-      <el-link @click="Logout">
+      <el-link @click="logout">
         <span>Logout</span>
       </el-link>
     </el-tag>
-    <div class="header__empty"></div>
+    <div class="header__empty">
+      <el-page-header
+        @back="goBack"
+        content=""
+        title="На главную страницу"
+        class="header__empty-title"
+        v-if="$route.name !== 'Home'"
+      >
+      </el-page-header>
+    </div>
   </el-menu>
 </template>
 
@@ -39,17 +48,20 @@ export default {
     HeaderSocial
   },
   computed: {
-    Username() {
+    username() {
       return this.$store.state.token.user.username;
     }
   },
   methods: {
-    Logout() {
+    logout() {
       this.$store.dispatch("logout");
       this.$notify({
         title: "Вы вышли из акаунта",
         type: "info"
       });
+    },
+    goBack() {
+      this.$router.push({ name: "Home" });
     }
   }
 };
@@ -72,6 +84,11 @@ export default {
   background: #adcc52;
 }
 
+.header__empty-title {
+  z-index: 999;
+  margin-left: 2%;
+}
+
 .header__content {
   display: flex;
   justify-content: space-around;
@@ -85,17 +102,21 @@ export default {
   display: flex;
   width: 30%;
 }
+
 .header__logo-container {
   width: 40%;
   max-width: 277px;
 }
+
 .header__logo-img {
   background: url(../assets/logo.png) no-repeat;
   height: 75px;
   filter: drop-shadow(1px 1px 0 #8ba442);
   top: 50%;
   position: absolute;
+  z-index: 998;
 }
+
 .header__logo-title {
   height: 13px;
   background: #adcc52;
@@ -149,6 +170,12 @@ export default {
   }
   .header__logo-img {
     top: 10%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header__logo-title {
+    display: none;
   }
 }
 </style>
