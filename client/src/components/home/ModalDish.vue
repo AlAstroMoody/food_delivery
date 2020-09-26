@@ -14,7 +14,7 @@
             {{ dish.description }}
           </div>
           <span class="modal__info" v-if="dish.weight > 0">
-            <img src="../assets/item_weight.png" />
+            <img src="../../assets/item_weight.png" />
             {{ dish.weight }} гр
           </span>
           <div class="modal__price">{{ dish.price }}₽</div>

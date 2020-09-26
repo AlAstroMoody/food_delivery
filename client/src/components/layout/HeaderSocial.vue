@@ -1,16 +1,16 @@
 <template>
   <div class="header-social">
     <el-button class="header-social__button">
-      <img src="../assets/social_facebook.png" alt="fb" />
+      <img src="../../assets/social_facebook.png" alt="fb" />
     </el-button>
     <el-button class="header-social__button">
-      <img src="../assets/social_instagram.png" alt="instagram" />
+      <img src="../../assets/social_instagram.png" alt="instagram" />
     </el-button>
     <el-button class="header-social__button">
-      <img src="../assets/social_vk.png" alt="vk" />
+      <img src="../../assets/social_vk.png" alt="vk" />
     </el-button>
     <el-button class="header-social__button">
-      <img src="../assets/social_twitter.png" alt="twitter" />
+      <img src="../../assets/social_twitter.png" alt="twitter" />
     </el-button>
   </div>
 </template>

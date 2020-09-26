@@ -61,10 +61,10 @@
 </template>
 
 <script>
-import AboutCafe from "../components/AboutCafe";
-import DishCard from "../components/DishCard";
-import SlickBag from "../components/SlickBag";
-import ModalDish from "../components/ModalDish";
+import AboutCafe from "../components/home/AboutCafe";
+import DishCard from "../components/home/DishCard";
+import SlickBag from "../components/home/SlickBag";
+import ModalDish from "../components/home/ModalDish";
 import { mapActions } from "vuex";
 
 export default {
@@ -153,6 +153,10 @@ export default {
 }
 
 .home__drawer {
+  display: none;
+}
+
+.home__cart {
   display: none;
 }
 
@@ -265,8 +269,8 @@ export default {
   .home__drawer {
     position: fixed;
     display: flex;
-    left: 2%;
-    top: 2%;
+    left: 10px;
+    top: 10px;
     z-index: 11;
     color: white;
     font-size: 25px;
@@ -274,8 +278,8 @@ export default {
   .home__cart {
     position: fixed;
     display: flex;
-    right: 2%;
-    top: 2%;
+    right: 10px;
+    top: 10px;
     z-index: 11;
     color: white;
     font-size: 25px;

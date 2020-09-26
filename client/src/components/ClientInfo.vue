@@ -49,9 +49,9 @@
 </template>
 
 <script>
-import inputField from "@/components/forms/inputField";
-import TextAreaField from "@/components/forms/textAreaField";
-import SelectField from "@/components/forms/selectField";
+import inputField from "@/components/fields/inputField";
+import TextAreaField from "@/components/fields/textAreaField";
+import SelectField from "@/components/fields/selectField";
 import { CENTER, VZLETKA } from "@/api/const";
 export default {
   name: "ClientInfo",

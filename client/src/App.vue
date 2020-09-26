@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 
 export default {
   name: "app",
@@ -27,6 +27,8 @@ export default {
   /*font-family: Roboto, FreeSans, sans-serif;*/
   color: #000;
   -webkit-text-size-adjust: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .fade-enter-active,

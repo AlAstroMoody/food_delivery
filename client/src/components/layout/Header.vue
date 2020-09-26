@@ -10,7 +10,7 @@
         <HeaderPhones title="Заказ столиков" phone="261-01-65" />
       </div>
       <div class="header__logo-container">
-        <img class="header__logo-img" src="../assets/logo.png" alt="logo" />
+        <img class="header__logo-img" src="../../assets/logo.png" alt="logo" />
         <span class="header__logo-title">cafe &amp; bar</span>
       </div>
       <header-social class="header__social" />
@@ -110,7 +110,7 @@ export default {
 }
 
 .header__logo-img {
-  background: url(../assets/logo.png) no-repeat;
+  background: url(../../assets/logo.png) no-repeat;
   height: 75px;
   filter: drop-shadow(1px 1px 0 #8ba442);
   top: 50%;

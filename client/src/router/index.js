@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import Order from "@/views/Order.vue";
 import Delivery from "@/views/Delivery.vue";
 import Profile from "@/views/Profile";
+import About from "@/views/About";
 import NotFoundComponent from "@/views/NotFoundComponent";
 import store from "@/store/index";
 
@@ -34,6 +35,11 @@ const routes = [
     path: "/profile/",
     name: "Profile",
     component: Profile
+  },
+  {
+    path: "/about/",
+    name: "About",
+    component: About
   },
   { path: "*", component: NotFoundComponent }
 ];
