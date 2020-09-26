@@ -16,6 +16,7 @@ const routes = [
     component: Home,
     beforeEnter(from, to, next) {
       store.dispatch("getAllDishes");
+      store.dispatch("getAllCategories");
       next();
     }
   },

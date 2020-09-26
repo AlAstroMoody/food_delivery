@@ -7,7 +7,6 @@
 #### Доработать:
 - Валидация полей заказа( vuelidate  )
 - Разграничить права доступа
-- Анимации?
 - Выпадающее меню для маленького разрешения
 - Создать второстепенные страницы
 - Обратить внимание на шрифты
@@ -31,7 +30,7 @@
 `sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose`
 
 Установка Fabric для удобной работы  
-`sudo pip install Fabric3`
+`sudo pip3 install Fabric3`
 
 Запуск приложения  
 `docker-compose build` - сборка
@@ -42,5 +41,3 @@
 `fab createsuperuser` - создать супер пользователя  
 #### Главная страница от 07.09:
 ![главная страница](screenshots/first.png )​
-#### Cтраница оформления заказа от 07.09:
-![страница заказа](screenshots/second.png )​

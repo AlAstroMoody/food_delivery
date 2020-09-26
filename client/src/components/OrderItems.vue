@@ -2,37 +2,39 @@
   <el-card class="order-items" :body-style="{ padding: '0px' }">
     <h1 class="order-items__title" v-if="title">{{ title }}</h1>
     <el-main class="order-items__body">
-      <div v-for="item in order" :key="item.id" class="order-items__cycle">
-        <div class="order-items__body-dishes">
-          <div class="order-items__body-title">{{ item.name }}</div>
-          <div class="order-items__body-action">
-            <el-button
-              circle
-              @click="removeDish(item.id)"
-              v-if="item.count === 1"
-              class="order-items__body-button"
-              icon="el-icon-close"
-            />
-            <el-button
-              circle
-              @click="minusDish(item.id)"
-              v-if="item.count > 1"
-              class="order-items__body-button"
-              icon="el-icon-minus"
-            />
-            {{ item.count }} шт.
-            <el-button
-              circle
-              @click="plusDish(item.id)"
-              icon="el-icon-plus"
-              class="order-items__body-button"
-            />
-            <div class="order-items__body-price">
-              <i>{{ item.price * item.count }}₽</i>
+      <transition-group name="fade" mode="out-in">
+        <div v-for="item in order" :key="item.id" class="order-items__cycle">
+          <div class="order-items__body-dishes">
+            <div class="order-items__body-title">{{ item.name }}</div>
+            <div class="order-items__body-action">
+              <el-button
+                circle
+                @click="removeDish(item.id)"
+                v-if="item.count === 1"
+                class="order-items__body-button"
+                icon="el-icon-close"
+              />
+              <el-button
+                circle
+                @click="minusDish(item.id)"
+                v-if="item.count > 1"
+                class="order-items__body-button"
+                icon="el-icon-minus"
+              />
+              {{ item.count }} шт.
+              <el-button
+                circle
+                @click="plusDish(item.id)"
+                icon="el-icon-plus"
+                class="order-items__body-button"
+              />
+              <div class="order-items__body-price">
+                <i>{{ item.price * item.count }}₽</i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </el-main>
     <div class="order-items__footer">
       <div>
@@ -156,5 +158,14 @@ export default {
 
 .order-items__cycle {
   border-bottom: 1px solid #999999;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

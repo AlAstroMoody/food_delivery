@@ -1,1 +1,1 @@
-from .dishes import DishViewSet
+from .dishes import DishViewSet, CategoryViewSet

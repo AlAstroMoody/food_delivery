@@ -1,1 +1,1 @@
-from .dishes import DishSerializer
+from .dishes import DishSerializer, CategorySerializer

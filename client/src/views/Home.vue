@@ -1,20 +1,16 @@
 <template>
   <div class="home">
     <div class="home__filters">
-<!--      <el-button type="text" v-for="dish in queryDishes" :key="dish" class="home__filters-button">-->
-<!--        {{dish.type}}-->
-<!--      </el-button>-->
-      <el-button type="text" class="home__filters-button"> Все блюда</el-button>
-      <el-button type="text" class="home__filters-button">Акции</el-button>
-      <el-button type="text" class="home__filters-button">Пицца</el-button>
-      <el-button type="text" class="home__filters-button">Паста</el-button>
-      <el-button type="text" class="home__filters-button">Основные блюда</el-button>
-      <el-button type="text" class="home__filters-button">Ризотто</el-button>
-      <el-button type="text" class="home__filters-button">Супы</el-button>
-      <el-button type="text" class="home__filters-button">Салаты</el-button>
-      <el-button type="text" class="home__filters-button">Закуски</el-button>
-      <el-button type="text" class="home__filters-button">Десерты</el-button>
-      <el-button type="text" class="home__filters-button">Напитки</el-button>
+      <el-button
+        type="text"
+        v-for="category in categories"
+        :key="category.id"
+        class="home__filters-button"
+        @click="filteredDishes(category.id)"
+        :class="{ 'home__filters-active': idCategory === category.id }"
+      >
+        {{ category.name }}
+      </el-button>
       <el-input v-model="query" placeholder="поиск" />
     </div>
     <about-cafe class="home__cafe" />
@@ -64,7 +60,8 @@ export default {
     return {
       modalVisible: false,
       dish: {},
-      query: ""
+      query: "",
+      idCategory: -1
     };
   },
   components: { AboutCafe, DishCard, SlickBag, ModalDish },
@@ -72,8 +69,7 @@ export default {
     ...mapActions([
       "editOrder",
       "removeDishInOrder",
-      "decreaseQuantityInOrder",
-      "getAllDishes"
+      "decreaseQuantityInOrder"
     ]),
     showModal(dish) {
       this.modalVisible = !this.modalVisible;
@@ -98,19 +94,37 @@ export default {
           };
         }
       }
+    },
+    filteredDishes(id) {
+      if (this.idCategory !== id) {
+        this.idCategory = id;
+      } else this.idCategory = -1;
     }
   },
   computed: {
     dishes() {
       return this.$store.state.dishes;
     },
+    categories() {
+      return this.$store.state.categories;
+    },
     order() {
       return this.$store.state.order;
     },
     queryDishes() {
-      return this.dishes.filter(item => {
-        return item.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1;
-      });
+      if (this.idCategory > -1) {
+        return this.dishes.filter(item => {
+          return (
+            item.category === this.idCategory &&
+            item.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+          );
+        });
+      } else
+        return this.dishes.filter(item => {
+          return (
+            item.name.toLowerCase().indexOf(this.query.toLowerCase()) !== -1
+          );
+        });
     }
   }
 };
@@ -133,7 +147,9 @@ export default {
   top: 0;
   z-index: 20;
   border: 1px solid #e5e5e5;
+  margin-top: -5px;
 }
+
 .home__main {
   display: flex;
   width: 100%;
@@ -158,6 +174,7 @@ export default {
   align-items: center;
   align-content: center;
   width: 60%;
+  margin-left: 5%;
   flex-wrap: wrap;
 }
 
@@ -180,6 +197,7 @@ export default {
   .home__menu {
     width: 80%;
     justify-content: flex-end;
+    margin: auto;
   }
   .home__slick-bag {
     left: 10%;
@@ -188,7 +206,7 @@ export default {
 @media screen and (max-width: 1400px) {
   .home__menu {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
     margin-left: 5%;
   }
   .home__slick-bag {
@@ -196,6 +214,9 @@ export default {
   }
   .home__menu-cards {
     min-width: 250px;
+  }
+  .home__filters {
+    display: none;
   }
 }
 @media screen and (max-width: 960px) {
@@ -228,6 +249,12 @@ export default {
 }
 
 .home__filters-button:hover {
+  background: #adcc52;
+  color: white;
+  transition: color 0.5s;
+}
+
+.home__filters-active {
   background: #adcc52;
   color: white;
   transition: color 0.5s;

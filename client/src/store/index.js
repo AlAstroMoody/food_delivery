@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getDishes } from "@/api/dishes";
+import { getDishes, getCategories } from "@/api/dishes";
 import { getPromo } from "@/api/promo";
 import createPersistedState from "vuex-persistedstate";
 import { authUser, registerUser } from "@/api/users";
@@ -11,6 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     dishes: [],
+    categories: [],
     order: [],
     token: {
       token: localStorage.getItem("token") || "",
@@ -33,6 +34,9 @@ export default new Vuex.Store({
   mutations: {
     SET_DISHES: (state, dishes) => {
       state.dishes = dishes;
+    },
+    SET_CATEGORIES: (state, categories) => {
+      state.categories = categories;
     },
     ORDER: (state, order) => {
       state.order = order;
@@ -90,6 +94,9 @@ export default new Vuex.Store({
   actions: {
     async getAllDishes({ commit }) {
       commit("SET_DISHES", await getDishes());
+    },
+    async getAllCategories({ commit }) {
+      commit("SET_CATEGORIES", await getCategories());
     },
     async editOrder({ commit }, payload) {
       commit("EDIT_ORDER", payload);

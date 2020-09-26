@@ -6,7 +6,7 @@
       <router-link :to="{ name: 'About' }">уютное кафе</router-link> итальянской
       домашней кухни в центре города
     </span>
-    <span class="cafe-info__block-map">
+    <div class="cafe-info__block-map">
       <i class="el-icon-location" />
       Наш адрес:
       <div class="cafe-info__address-link">
@@ -19,7 +19,7 @@
           ул. Партизана Железняка, 26а
         </router-link>
       </div>
-    </span>
+    </div>
     <span class="cafe-info__block-delivery">
       <i class="el-icon-truck" />
       <router-link :to="{ name: 'Delivery' }">
