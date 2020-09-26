@@ -22,7 +22,8 @@ export default {
 
 <style scoped>
 .footer {
-  height: 20vh;
+  height: 25vh;
+  min-height: 230px;
   width: 100%;
   padding: 30px 0 30px;
   background-color: #e5e5e5;

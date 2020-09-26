@@ -74,6 +74,7 @@ export default {
   box-shadow: 4px 2px 10px 0 rgba(0, 0, 0, 0.1);
   justify-content: center;
   flex-wrap: wrap;
+  z-index: 10;
 }
 
 .header__empty {
@@ -156,6 +157,11 @@ export default {
   }
 }
 @media screen and (max-width: 960px) {
+  .header {
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
   .header__phones {
     display: none;
   }

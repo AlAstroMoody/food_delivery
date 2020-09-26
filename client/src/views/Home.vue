@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="home__filters">
+    <div class="home__filters" :class="{ 'home__filters-show': showFilter }">
       <el-button
         type="text"
         v-for="category in categories"
@@ -13,6 +13,19 @@
       </el-button>
       <el-input v-model="query" placeholder="поиск" />
     </div>
+    <el-button
+      @click="showFilter = !showFilter"
+      class="home__drawer"
+      icon="el-icon-s-operation"
+      type="text"
+    />
+    <router-link :to="{ name: 'Order' }">
+      <el-button
+        class="home__cart"
+        icon="el-icon-shopping-cart-full"
+        type="text"
+      />
+    </router-link>
     <about-cafe class="home__cafe" />
     <transition name="fade">
       <modal-dish
@@ -61,7 +74,8 @@ export default {
       modalVisible: false,
       dish: {},
       query: "",
-      idCategory: -1
+      idCategory: -1,
+      showFilter: false
     };
   },
   components: { AboutCafe, DishCard, SlickBag, ModalDish },
@@ -99,6 +113,7 @@ export default {
       if (this.idCategory !== id) {
         this.idCategory = id;
       } else this.idCategory = -1;
+      this.showFilter = !this.showFilter;
     }
   },
   computed: {
@@ -135,6 +150,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.home__drawer {
+  display: none;
 }
 
 .home__filters {
@@ -203,6 +222,7 @@ export default {
     left: 10%;
   }
 }
+
 @media screen and (max-width: 1400px) {
   .home__menu {
     width: 100%;
@@ -216,9 +236,10 @@ export default {
     min-width: 250px;
   }
   .home__filters {
-    display: none;
+    width: 90%;
   }
 }
+
 @media screen and (max-width: 960px) {
   .home__menu {
     width: 100%;
@@ -227,7 +248,40 @@ export default {
   .home__slick-bag {
     display: none;
   }
+  .home__filters {
+    position: fixed;
+    top: 10%;
+    left: -250px;
+    text-align: left;
+    flex-direction: column;
+    width: 50%;
+    max-width: 200px;
+    align-content: flex-start;
+    transition: left 0.3s linear;
+  }
+  .home__filters-button {
+    text-align: left;
+  }
+  .home__drawer {
+    position: fixed;
+    display: flex;
+    left: 2%;
+    top: 2%;
+    z-index: 11;
+    color: white;
+    font-size: 25px;
+  }
+  .home__cart {
+    position: fixed;
+    display: flex;
+    right: 2%;
+    top: 2%;
+    z-index: 11;
+    color: white;
+    font-size: 25px;
+  }
 }
+
 .home__cafe {
   width: 80%;
 }
@@ -258,5 +312,9 @@ export default {
   background: #adcc52;
   color: white;
   transition: color 0.5s;
+}
+
+.home__filters-show {
+  left: 1%;
 }
 </style>
