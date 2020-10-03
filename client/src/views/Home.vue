@@ -12,6 +12,19 @@
         {{ category.name }}
       </el-button>
       <el-input v-model="query" placeholder="поиск" />
+      <div class="home__filters-hidden">
+        <hr />
+        <el-button type="text">
+          <router-link :to="{ name: 'Delivery' }" class="home__filters-button">
+            Доставка
+          </router-link>
+        </el-button>
+        <el-button type="text">
+          <router-link :to="{ name: 'About' }" class="home__filters-button">
+            О нас
+          </router-link>
+        </el-button>
+      </div>
     </div>
     <el-button
       @click="showFilter = !showFilter"
@@ -36,14 +49,11 @@
       />
     </transition>
     <section class="home__main">
-      <slick-bag
-        class="home__slick-bag"
-        :order="order"
-        @removeDishInOrder="removeDishInOrder"
-        @addToOrder="addToOrder"
-        @decreaseQuantityInOrder="decreaseQuantityInOrder"
-      />
-      <transition-group name="fade" class="home__menu">
+      <slick-bag class="home__slick-bag" :order="order" />
+      <h2 class="home__menu" v-if="queryDishes.length < 1">
+        По вашему запросу ничего не найдено!
+      </h2>
+      <transition-group name="fade" class="home__menu" v-else>
         <div
           v-for="dish in queryDishes"
           :key="dish.id"
@@ -51,7 +61,7 @@
         >
           <dish-card
             :dish="dish"
-            @addToOrder="addToOrder"
+            @addToOrder="addToOrder(dish)"
             @showModal="showModal"
           />
         </div>
@@ -65,7 +75,6 @@ import AboutCafe from "../components/home/AboutCafe";
 import DishCard from "../components/home/DishCard";
 import SlickBag from "../components/home/SlickBag";
 import ModalDish from "../components/home/ModalDish";
-import { mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -80,34 +89,16 @@ export default {
   },
   components: { AboutCafe, DishCard, SlickBag, ModalDish },
   methods: {
-    ...mapActions([
-      "editOrder",
-      "removeDishInOrder",
-      "decreaseQuantityInOrder"
-    ]),
     showModal(dish) {
       this.modalVisible = !this.modalVisible;
       this.dish = dish;
     },
-    addToOrder(id) {
-      this.$store.dispatch("editOrder", this.getDishById(id));
-    },
-    removeDishInOrder(id) {
-      this.$store.dispatch("removeDishInOrder", this.getDishById(id));
-    },
-    decreaseQuantityInOrder(id) {
-      this.$store.dispatch("decreaseQuantityInOrder", this.getDishById(id));
-    },
-    getDishById(id) {
-      for (let i = 0; i < this.dishes.length; i++) {
-        if (this.dishes[i]["id"] === id) {
-          return {
-            id: id,
-            name: this.dishes[i]["name"],
-            price: this.dishes[i]["price"]
-          };
-        }
-      }
+    addToOrder(dish) {
+      this.$store.dispatch("addNewDishToOrder", {
+        id: dish.id,
+        name: dish.name,
+        price: dish.price
+      });
     },
     filteredDishes(id) {
       if (this.idCategory !== id) {
@@ -156,6 +147,10 @@ export default {
   display: none;
 }
 
+.home__cafe {
+  width: 80%;
+}
+
 .home__cart {
   display: none;
 }
@@ -173,10 +168,14 @@ export default {
   margin-top: -5px;
 }
 
+.home__filters-hidden {
+  display: none;
+}
+
 .home__main {
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .home__slick-bag {
@@ -188,7 +187,7 @@ export default {
   min-width: 300px;
   max-width: 400px;
   top: 60px;
-  left: 15%;
+  left: 10%;
 }
 
 .home__menu {
@@ -219,11 +218,10 @@ export default {
 @media screen and (max-width: 1600px) {
   .home__menu {
     width: 80%;
-    justify-content: flex-end;
-    margin: auto;
   }
+
   .home__slick-bag {
-    left: 10%;
+    left: 5%;
   }
 }
 
@@ -233,12 +231,15 @@ export default {
     justify-content: center;
     margin-left: 5%;
   }
+
   .home__slick-bag {
     left: 5%;
   }
+
   .home__menu-cards {
     min-width: 250px;
   }
+
   .home__filters {
     width: 90%;
   }
@@ -248,10 +249,13 @@ export default {
   .home__menu {
     width: 100%;
     justify-content: center;
+    margin-left: auto;
   }
+
   .home__slick-bag {
     display: none;
   }
+
   .home__filters {
     position: fixed;
     top: 10%;
@@ -263,9 +267,16 @@ export default {
     align-content: flex-start;
     transition: left 0.3s linear;
   }
+
+  .home__filters-hidden {
+    display: flex;
+    flex-direction: column;
+  }
+
   .home__filters-button {
     text-align: left;
   }
+
   .home__drawer {
     position: fixed;
     display: flex;
@@ -275,6 +286,7 @@ export default {
     color: white;
     font-size: 25px;
   }
+
   .home__cart {
     position: fixed;
     display: flex;
@@ -284,10 +296,6 @@ export default {
     color: white;
     font-size: 25px;
   }
-}
-
-.home__cafe {
-  width: 80%;
 }
 
 .fade-enter-active,

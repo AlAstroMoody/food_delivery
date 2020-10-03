@@ -6,17 +6,17 @@
         <input-field
           name="Как вас зовут?"
           :value.sync="profile.name"
-          :pattern="/^[a-zA-Z ]{2,30}$/"
+          :pattern="/^[a-zA-Zа-яА-Я]{2,30}$/"
         />
         <input-field
           name="Номер телефона"
           :value.sync="profile.phone"
-          pattern="/^[0-9]{11}$/"
+          :pattern="/^[0-9]{11}$/"
         />
         <input-field
           name="E-mail"
           :value.sync="profile.email"
-          pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/"
+          :pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/"
         />
         <input-field name="Адрес доставки:" :value.sync="profile.address" />
         <data-field name="Дата рождения" :value.sync="profile.birthday" />
@@ -78,13 +78,23 @@ export default {
 
 <style scoped>
 .profile {
-  height: 60vh;
+  height: 500px;
   text-align: center;
 }
 .profile__card {
   width: 50%;
-  min-width: 350px;
+  min-width: 550px;
+  max-width: 700px;
   margin: auto;
   text-align: left;
+}
+@media screen and (max-width: 600px) {
+  .profile__card {
+    min-width: 380px;
+  }
+  .client-info__form {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

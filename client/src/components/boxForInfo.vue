@@ -18,4 +18,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+footer {
+  display: flex;
+  width: 100%;
+}
+</style>

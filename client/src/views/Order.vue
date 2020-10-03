@@ -2,9 +2,6 @@
   <div class="order">
     <order-items
       :order="order"
-      @addToOrder="addToOrder"
-      @decreaseQuantityInOrder="decreaseQuantityInOrder"
-      @removeDishInOrder="removeDishInOrder"
       class="orderItems"
       title="В вашем заказе:"
       footerInfo="Сумма минимального заказа от 490 руб, в отдаленные районы от 1290 руб, подробнее об условиях"
@@ -51,7 +48,6 @@ import { addDishesToOrder } from "@/api/orders";
 import OrderItems from "@/components/OrderItems";
 import AuthOrRegister from "@/components/AuthOrRegister";
 import ClientInfo from "@/components/ClientInfo";
-import { mapActions } from "vuex";
 
 export default {
   name: "Order",
@@ -93,38 +89,12 @@ export default {
           });
           if (this.orderInfo["id"]) {
             this.$store.state.order = [];
-            this.goBack();
+            await this.$router.push("/");
           } else {
             this.$notify.info({
               message: "Произошла непредвиденная ошибка"
             });
           }
-        }
-      }
-    },
-    ...mapActions([
-      "editOrder",
-      "removeDishInOrder",
-      "decreaseQuantityInOrder"
-    ]),
-    // задублированы функции с Home, исправить
-    addToOrder(id) {
-      this.$store.dispatch("editOrder", this.getDishById(id));
-    },
-    removeDishInOrder(id) {
-      this.$store.dispatch("removeDishInOrder", this.getDishById(id));
-    },
-    decreaseQuantityInOrder(id) {
-      this.$store.dispatch("decreaseQuantityInOrder", this.getDishById(id));
-    },
-    getDishById(id) {
-      for (let i = 0; i < this.dishes.length; i++) {
-        if (this.dishes[i]["id"] === id) {
-          return {
-            id: id,
-            name: this.dishes[i]["name"],
-            price: this.dishes[i]["price"]
-          };
         }
       }
     }

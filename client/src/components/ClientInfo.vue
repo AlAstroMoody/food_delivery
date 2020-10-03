@@ -88,15 +88,15 @@ export default {
       // прикрутить валидацию
       let formData = new FormData();
       formData.set("user", this.$store.state.token.user.pk);
-      formData.set("status", 1);
+      formData.set("status", '1');
       formData.set("comment", this.comment);
       formData.set("user_name", this.profile.name);
       formData.set("phone", this.profile.phone);
       if (this.delivery) {
-        formData.set("is_delivery", true);
+        formData.set("is_delivery", 'true');
         formData.set("address", this.profile.address);
       } else {
-        formData.set("is_delivery", false);
+        formData.set("is_delivery", 'false');
         console.log(this.place);
         formData.set("address", this.place);
       }

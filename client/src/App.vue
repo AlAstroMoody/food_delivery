@@ -31,6 +31,13 @@ export default {
   flex-direction: column;
 }
 
+a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #409eff;
+}
+
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s;

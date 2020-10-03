@@ -4,13 +4,7 @@
     <div class="slick-bag__body" v-if="order.length === 0">
       Нажмите «ЗАКАЗАТЬ» чтобы товар добавился к заказу.
     </div>
-    <order-items
-      :order="order"
-      @addToOrder="addToOrder"
-      @decreaseQuantityInOrder="decreaseQuantityInOrder"
-      @removeDishInOrder="removeDishInOrder"
-      class="slick-bag__order-items"
-    />
+    <order-items :order="order" class="slick-bag__order-items" />
     <div class="slick-bag__footer">
       <el-button
         round
@@ -41,15 +35,6 @@ export default {
     },
     isButtonDisabled() {
       return this.order.length > 0;
-    },
-    addToOrder(id) {
-      this.$emit("addToOrder", id);
-    },
-    removeDishInOrder(id) {
-      this.$emit("removeDishInOrder", id);
-    },
-    decreaseQuantityInOrder(id) {
-      this.$emit("decreaseQuantityInOrder", id);
     }
   }
 };

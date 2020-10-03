@@ -21,10 +21,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["getPromoImages"])
+    ...mapActions(["setPromoImages"])
   },
   created() {
-    this.$store.dispatch("getPromoImages");
+    this.$store.dispatch("setPromoImages");
   }
 };
 </script>
@@ -57,7 +57,8 @@ export default {
 
 @media screen and (max-width: 800px) {
   .cafe__promo {
-    min-width: 600px;
+    min-width: 90%;
+    height: 270px;
   }
 }
 

@@ -7,7 +7,7 @@
       <h1 class="dish__title">{{ dish.name }}</h1>
       <div class="dish__order">
         {{ dish.price }}₽
-        <el-button round class="dish__button" @click="addToOrder(dish.id)">
+        <el-button round class="dish__button" @click="addToOrder">
           Заказать
         </el-button>
       </div>
@@ -25,12 +25,12 @@ export default {
     }
   },
   methods: {
-    addToOrder(id) {
+    addToOrder() {
       this.$notify.success({
         title: this.dish.name,
         message: "Добавлено в заказ"
       });
-      this.$emit("addToOrder", id);
+      this.$emit("addToOrder");
     },
     showModal() {
       this.$emit("showModal", this.dish);
@@ -48,7 +48,7 @@ export default {
   justify-content: center;
 }
 .dish__header {
-  min-height: 300px;
+  min-height: 290px;
   display: flex;
   justify-content: center;
 }
@@ -109,6 +109,9 @@ export default {
   }
   .dish__footer-button {
     font-size: 17px;
+  }
+  .dish__title {
+    font-size: 19px;
   }
 }
 

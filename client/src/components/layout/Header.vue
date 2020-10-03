@@ -1,6 +1,13 @@
 <template>
   <el-menu class="header" mode="horizontal">
     <div class="header__content">
+      <el-button
+        icon="el-icon-back"
+        type="text"
+        class="header__back"
+        @click="goBack"
+        v-if="$route.name !== 'Home'"
+      />
       <div class="header__phones">
         <header-phones
           title="Телефон доставки"
@@ -77,6 +84,10 @@ export default {
   z-index: 10;
 }
 
+.header__back {
+  display: none;
+}
+
 .header__empty {
   width: 100%;
   background-size: 10px 10px;
@@ -88,6 +99,7 @@ export default {
 .header__empty-title {
   z-index: 999;
   margin-left: 2%;
+  color: #739900;
 }
 
 .header__content {
@@ -137,14 +149,14 @@ export default {
   position: relative;
   width: 30%;
   height: 30%;
-  margin-top: 5%;
+  margin-top: 60px;
   justify-content: center;
 }
 
 .header__user {
   position: absolute;
-  right: 10px;
-  top: 30px;
+  right: 25px;
+  top: 25px;
   margin-right: 20px;
   font-size: 17px;
 }
@@ -152,10 +164,8 @@ export default {
   .header__content {
     width: 100%;
   }
-  .header__user {
-    display: none;
-  }
 }
+
 @media screen and (max-width: 960px) {
   .header {
     position: sticky;
@@ -177,11 +187,29 @@ export default {
   .header__logo-img {
     top: 10%;
   }
-}
+  .header__user {
+    top: 33px;
+  }
 
-@media screen and (max-width: 600px) {
-  .header__logo-title {
+  .header__back {
+    display: flex;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 30px;
+    color: white;
+  }
+  .header__empty-title {
     display: none;
   }
+}
+
+@media screen and (max-width: 740px) {
+  .header__user {
+    display: none;
+  }
+}
+a{
+  color: white;
 }
 </style>

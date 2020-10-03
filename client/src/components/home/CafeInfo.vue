@@ -10,12 +10,12 @@
       <i class="el-icon-location" />
       Наш адрес:
       <div class="cafe-info__address-link">
-        <router-link :to="{ name: 'Delivery' }">
+        <router-link :to="{ name: 'Map' }">
           ул. Диктатуры пролетариата, 32а
         </router-link>
       </div>
       <div class="cafe-info__address-link">
-        <router-link :to="{ name: 'Delivery' }">
+        <router-link :to="{ name: 'Map' }">
           ул. Партизана Железняка, 26а
         </router-link>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <el-card class="order-items" :body-style="{ padding: '0px' }">
-    <h1 class="order-items__title" v-if="title">{{ title }}</h1>
+    <h2 class="order-items__title" v-if="title">{{ title }}</h2>
     <el-main class="order-items__body">
       <transition-group name="fade" mode="out-in">
         <div v-for="item in order" :key="item.id" class="order-items__cycle">
@@ -75,17 +75,20 @@ export default {
           return result + item.count * item.price;
         }, 0);
       }
+    },
+    dishes() {
+      return this.$store.state.dishes;
     }
   },
   methods: {
     removeDish(id) {
-      this.$emit("removeDishInOrder", id);
+      this.$store.dispatch("removeDish", id);
     },
     plusDish(id) {
-      this.$emit("addToOrder", id);
+      this.$store.dispatch("increment", id);
     },
     minusDish(id) {
-      this.$emit("decreaseQuantityInOrder", id);
+      this.$store.dispatch("decrement", id);
     }
   }
 };

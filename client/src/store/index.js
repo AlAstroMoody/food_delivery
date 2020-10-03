@@ -32,16 +32,16 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SET_DISHES: (state, dishes) => {
+    setDishes: (state, dishes) => {
       state.dishes = dishes;
     },
-    SET_CATEGORIES: (state, categories) => {
+    setCategories: (state, categories) => {
       state.categories = categories;
     },
-    ORDER: (state, order) => {
+    order: (state, order) => {
       state.order = order;
     },
-    EDIT_ORDER: (state, payload) => {
+    addNewDishToOrder: (state, payload) => {
       const index = state.order.findIndex(
         original => original["id"] === payload.id
       );
@@ -56,88 +56,88 @@ export default new Vuex.Store({
         state.order[index].count++;
       }
     },
-    REMOVE_DISH_IN_ORDER: (state, payload) => {
-      const index = state.order.findIndex(
-        original => original["id"] === payload.id
-      );
+    removeDish: (state, id) => {
+      const index = state.order.findIndex(original => original["id"] === id);
       state.order.splice(index, 1);
     },
-    DECREASE_QUANTITY_DISH_IN_ORDER: (state, payload) => {
-      const index = state.order.findIndex(
-        original => original["id"] === payload.id
-      );
+    increment: (state, id) => {
+      const index = state.order.findIndex(original => original["id"] === id);
+      state.order[index].count++;
+    },
+    decrement: (state, id) => {
+      const index = state.order.findIndex(original => original["id"] === id);
       state.order[index].count--;
     },
-    AUTH_USER: (state, token) => {
+    auth: (state, token) => {
       state.token = token;
       state.statusAuth = true;
     },
-    LOGOUT: state => {
+    logout: state => {
       state.token.token = "";
       state.token.user.username = "";
       state.token.user.pk = "";
       state.statusAuth = false;
     },
-    REGISTER_USER(state) {
+    register(state) {
       state.statusAuth = true;
     },
-    ERROR(state) {
+    error(state) {
       state.statusAuth = false;
     },
-    SET_PROMO_IMAGES: (state, promo) => {
+    setPromoImages: (state, promo) => {
       state.promo = promo;
     },
-    PROFILE: (state, profile) => {
+    profile: (state, profile) => {
       state.profile = profile;
     }
   },
   actions: {
-    async getAllDishes({ commit }) {
-      commit("SET_DISHES", await getDishes());
+    async setDishes({ commit }) {
+      commit("setDishes", await getDishes());
     },
-    async getAllCategories({ commit }) {
-      commit("SET_CATEGORIES", await getCategories());
+    async setCategories({ commit }) {
+      commit("setCategories", await getCategories());
     },
-    async editOrder({ commit }, payload) {
-      commit("EDIT_ORDER", payload);
+    async addNewDishToOrder({ commit }, payload) {
+      commit("addNewDishToOrder", payload);
     },
-    async removeDishInOrder({ commit }, payload) {
-      commit("REMOVE_DISH_IN_ORDER", payload);
+    async removeDish({ commit }, id) {
+      commit("removeDish", id);
     },
-    async decreaseQuantityInOrder({ commit }, payload) {
-      commit("DECREASE_QUANTITY_DISH_IN_ORDER", payload);
+    async decrement({ commit }, id) {
+      commit("decrement", id);
     },
-    async signIn({ commit }, user) {
-      commit("AUTH_USER", await authUser(user));
+    async increment({ commit }, id) {
+      commit("increment", id);
+    },
+    async auth({ commit }, user) {
+      commit("auth", await authUser(user));
     },
     async logout({ commit }) {
-      commit("LOGOUT");
+      commit("logout");
       localStorage.removeItem("token");
     },
-    async registerNewUser({ commit }, user) {
+    async register({ commit }, user) {
       try {
-        commit("REGISTER_USER", await registerUser(user));
-        commit("AUTH_USER", await authUser(user));
+        commit("register", await registerUser(user));
+        commit("auth", await authUser(user));
       } catch {
-        commit("ERROR");
+        commit("error");
       }
     },
-    async getPromoImages({ commit }) {
-      commit("SET_PROMO_IMAGES", await getPromo());
+    async setPromoImages({ commit }) {
+      commit("setPromoImages", await getPromo());
     },
     async getUserProfile({ commit }, id) {
-      commit("PROFILE", await getProfile(id));
+      commit("profile", await getProfile(id));
     },
     async editUserProfile({ commit }, id) {
-      commit("PROFILE", await editProfile(id));
+      commit("profile", await editProfile(id));
     }
   },
   getters: {
     dishes(state) {
       return state.dishes;
-    },
-    dish: state => id => {
-      return state.dishes[id];
     }
   },
   modules: {},

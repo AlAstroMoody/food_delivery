@@ -35,22 +35,15 @@ export default {
 
 .cafe-promo__image {
   min-width: 350px;
-  width: 700px;
+  width: 100%;
   height: auto;
   margin: auto;
   position: relative;
   top: -8%;
 }
 
-@media screen and (max-width: 800px) {
-  .cafe-promo__image {
-    width: 100%;
-  }
-}
-
 @media screen and (max-width: 600px) {
   .cafe-promo__image {
-    position: relative;
     top: -20%;
   }
 }
