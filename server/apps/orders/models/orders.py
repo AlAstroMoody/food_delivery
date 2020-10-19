@@ -20,7 +20,7 @@ class Status(models.Model):
 class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     comment = models.TextField(max_length=1000, blank=True,
-                                null=True, default=None)
+                               null=True, default=None)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     total_price = models.DecimalField(max_digits=10,
                                       decimal_places=2, default=0)

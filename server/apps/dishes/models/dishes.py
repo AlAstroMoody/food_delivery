@@ -8,9 +8,9 @@ class Category(models.Model):
         return self.name
 
     class Meta:
-            verbose_name = 'Категория'
-            verbose_name_plural = 'Категории'
-            ordering = ('id',)
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ('id',)
 
 
 class Dish(models.Model):

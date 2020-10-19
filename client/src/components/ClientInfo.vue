@@ -4,11 +4,13 @@
       <input-field
         name="Как вас зовут?"
         :value.sync="profile.name"
-        :pattern="/^[a-zA-Zа-яА-Я]{2,30}$/"
+        :pattern="/^[a-zA-Zа-яА-Я_ ]{2,30}$/"
+        placeholder="введите имя"
       />
       <input-field
         name="Номер телефона"
         :value.sync="profile.phone"
+        placeholder="+7-xxx-xxxxxxx"
         :pattern="/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7}$/"
       />
       <text-area-field name="Комментарий к заказу" :value.sync="comment" />
@@ -28,6 +30,7 @@
           name="Адрес доставки:"
           :value.sync="profile.address"
           :pattern="/./"
+          placeholder="введите адрес доставки"
         />
         <select-field
           v-if="!delivery"
@@ -49,10 +52,11 @@
 </template>
 
 <script>
-import inputField from "@/components/fields/inputField";
+import inputField from "@/components/fields/textField";
 import TextAreaField from "@/components/fields/textAreaField";
 import SelectField from "@/components/fields/selectField";
 import { CENTER, VZLETKA } from "@/api/const";
+
 export default {
   name: "ClientInfo",
   data() {
@@ -85,19 +89,17 @@ export default {
       this.place = address;
     },
     onSubmit() {
-      // прикрутить валидацию
       let formData = new FormData();
       formData.set("user", this.$store.state.token.user.pk);
-      formData.set("status", '1');
+      formData.set("status", "1");
       formData.set("comment", this.comment);
       formData.set("user_name", this.profile.name);
       formData.set("phone", this.profile.phone);
       if (this.delivery) {
-        formData.set("is_delivery", 'true');
+        formData.set("is_delivery", "true");
         formData.set("address", this.profile.address);
       } else {
-        formData.set("is_delivery", 'false');
-        console.log(this.place);
+        formData.set("is_delivery", "false");
         formData.set("address", this.place);
       }
       this.$emit("createOrder", formData);

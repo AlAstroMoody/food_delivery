@@ -6,12 +6,14 @@
         <input-field
           name="Как вас зовут?"
           :value.sync="profile.name"
-          :pattern="/^[a-zA-Zа-яА-Я]{2,30}$/"
+          placeholder="введите имя"
+          :pattern="/^[a-zA-Zа-яА-Я_ ]{2,30}$/"
         />
         <input-field
           name="Номер телефона"
           :value.sync="profile.phone"
-          :pattern="/^[0-9]{11}$/"
+          placeholder="+7-xxx-xxxxxxx"
+          :pattern="/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7}$/"
         />
         <input-field
           name="E-mail"
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-import inputField from "@/components/fields/inputField";
+import inputField from "@/components/fields/textField";
 import dataField from "@/components/fields/dataField";
 import { CENTER, VZLETKA } from "@/api/const";
 import { mapActions } from "vuex";
@@ -81,6 +83,7 @@ export default {
   height: 500px;
   text-align: center;
 }
+
 .profile__card {
   width: 50%;
   min-width: 550px;
@@ -88,9 +91,11 @@ export default {
   margin: auto;
   text-align: left;
 }
+
 @media screen and (max-width: 600px) {
   .profile__card {
-    min-width: 380px;
+    width: 80%;
+    min-width: 370px;
   }
   .client-info__form {
     display: flex;

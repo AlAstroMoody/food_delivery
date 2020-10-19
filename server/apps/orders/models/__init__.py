@@ -1,1 +1,1 @@
-from .orders import Order, DishInOrder, Status
+from .orders import Status, Order, DishInOrder

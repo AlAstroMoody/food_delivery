@@ -64,10 +64,10 @@ export default {
   },
   methods: {
     async registerUser(formData) {
-      await this.$store.dispatch("registerNewUser", formData);
+      await this.$store.dispatch("register", formData);
     },
     async signIn(formData) {
-      await this.$store.dispatch("signIn", formData);
+      await this.$store.dispatch("auth", formData);
     },
     async createOrder(formData) {
       if (this.order.length > 0) {
