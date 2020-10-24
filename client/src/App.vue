@@ -37,7 +37,6 @@ a {
   color: #409eff;
 }
 
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s;

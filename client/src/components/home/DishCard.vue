@@ -1,16 +1,12 @@
 <template>
   <el-card class="dish" :body-style="{ padding: '0px' }" shadow="hover">
-    <div class="dish__header">
-      <el-image :src="dish.image" class="dish__image" @click="showModal" />
-    </div>
-    <div class="dish__footer">
-      <h1 class="dish__title">{{ dish.name }}</h1>
-      <div class="dish__order">
-        {{ dish.price }}₽
-        <el-button round class="dish__button" @click="addToOrder">
-          Заказать
-        </el-button>
-      </div>
+    <el-image :src="dish.image" class="dish__image" @click="showModal" />
+    <h1 class="dish__title">{{ dish.name }}</h1>
+    <div class="dish__order">
+      {{ dish.price }}₽
+      <el-button round class="dish__button" @click="addToOrder">
+        Заказать
+      </el-button>
     </div>
   </el-card>
 </template>
@@ -43,26 +39,14 @@ export default {
 .dish {
   display: flex;
   width: 100%;
-  border-radius: 6%;
+  border-radius: 10px;
   text-align: center;
-  justify-content: center;
-}
-.dish__header {
-  min-height: 290px;
-  display: flex;
   justify-content: center;
 }
 
 .dish__image {
   margin: auto;
   width: 100%;
-}
-
-.dish__footer {
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 }
 
 .dish__title {
@@ -77,37 +61,27 @@ export default {
   justify-content: space-around;
   font-size: 25px;
   align-items: center;
-  margin: 2%;
+  margin: 3%;
   color: orange;
-  position: absolute;
   width: 100%;
-  bottom: 2%;
 }
 
 .dish__button {
   background: orange;
-  padding: 5%;
+  padding: 15px;
   font-size: 20px;
   color: white;
   box-shadow: 0 0 5px 0 rgba(252, 146, 33, 0.5);
 }
 
-@media screen and (max-width: 1400px) {
-  .dish__header {
-    min-height: 50%;
-    max-height: 60%;
-
-    min-width: 250px;
-  }
-}
 @media screen and (max-width: 850px) {
-  .dish__footer-title {
+  .dish__title {
     font-size: 18px;
   }
-  .dish__footer-order {
+  .dish__order {
     font-size: 18px;
   }
-  .dish__footer-button {
+  .dish__button {
     font-size: 17px;
   }
   .dish__title {
@@ -116,11 +90,19 @@ export default {
 }
 
 @media screen and (max-width: 700px) {
-  .dish__footer-title {
+  .dish__title {
     font-size: 16px;
   }
-  .dish__footer {
-    min-height: 100px;
+  .dish__order {
+    justify-content: center;
+  }
+  .dish__button {
+    margin-left: 15px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .dish__button {
+    margin-left: 5px;
   }
 }
 </style>

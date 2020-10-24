@@ -171,4 +171,22 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
+@media screen and (max-width: 700px) {
+  .order-items__footer {
+    font-size: 12px;
+  }
+  .order-items__title {
+    font-size: 20px;
+  }
+  .order-items__body-title {
+    font-size: 15px;
+  }
+  .order-items__body-action {
+    font-size: 15px;
+  }
+}
+
+span {
+  margin-top: 5px;
+}
 </style>

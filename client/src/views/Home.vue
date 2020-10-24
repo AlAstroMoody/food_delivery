@@ -297,6 +297,12 @@ export default {
     font-size: 25px;
   }
 }
+@media screen and (max-width: 550px) {
+  .home__menu-cards {
+    width: 48%;
+    min-width: 180px;
+  }
+}
 
 .fade-enter-active,
 .fade-leave-active {

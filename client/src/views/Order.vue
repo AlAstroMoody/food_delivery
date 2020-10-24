@@ -126,7 +126,7 @@ export default {
 .orderItems {
   width: 50%;
   font-size: 25px;
-  min-width: 350px;
+  min-width: 370px;
 }
 
 .order__is-auth {
@@ -137,7 +137,7 @@ export default {
 
 .order__client-info {
   width: 40%;
-  min-width: 350px;
+  min-width: 440px;
 }
 
 .fade-enter-active,
@@ -148,5 +148,31 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media screen and (max-width: 450px) {
+  .order__client-info {
+    min-width: 370px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .orderItems {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .orderItems {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .orderItems {
+    width: 90%;
+  }
+  .orderItems {
+    font-size: 20px;
+  }
 }
 </style>

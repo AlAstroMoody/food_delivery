@@ -209,7 +209,7 @@ export default {
     display: none;
   }
 }
-a{
+a {
   color: white;
 }
 </style>

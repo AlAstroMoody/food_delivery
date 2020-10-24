@@ -1,14 +1,13 @@
 <template>
-  <div class="field">
-    <label for="field" class="field__label"> {{ name }} </label>
+  <label class="field">
+    <span class="field__label">{{ name }}</span>
     <el-input
-      id="field"
       :placeholder="placeholder"
       class="field__input"
       v-model="editField"
       :class="isError"
     />
-  </div>
+  </label>
 </template>
 
 <script>
@@ -65,13 +64,13 @@ export default {
 }
 
 .field__label {
-  width: 30%;
-  min-width: 140px;
+  width: 50%;
+  min-width: 130px;
 }
 
 .field__input {
-  width: 65%;
-  min-width: 190px;
+  width: 50%;
+  min-width: 130px;
 }
 
 .error {
@@ -84,19 +83,28 @@ export default {
 
 @keyframes shakeError {
   0% {
-    transform: translateX(0); }
+    transform: translateX(0);
+  }
   15% {
-    transform: translateX(0.375rem); }
+    transform: translateX(0.375rem);
+  }
   30% {
-    transform: translateX(-0.375rem); }
+    transform: translateX(-0.375rem);
+  }
   45% {
-    transform: translateX(0.375rem); }
+    transform: translateX(0.375rem);
+  }
   60% {
-    transform: translateX(-0.375rem); }
+    transform: translateX(-0.375rem);
+  }
   75% {
-    transform: translateX(0.375rem); }
+    transform: translateX(0.375rem);
+  }
   90% {
-    transform: translateX(-0.375rem); }
+    transform: translateX(-0.375rem);
+  }
   100% {
-    transform: translateX(0); } }
+    transform: translateX(0);
+  }
+}
 </style>

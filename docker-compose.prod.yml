@@ -14,35 +14,23 @@ services:
         build:
             context: ./
             dockerfile: ./server/Dockerfile
-        command: python manage.py runserver 0.0.0.0:8000
-        restart: always
+        command: gunicorn config.wsgi -c ./config/gunicorn.py
         volumes:
-            - ./server:/server
-        ports:
-            - 8000:8000
+            - ./server/media:/server/media
         depends_on:
             - db
             - redis
-            - frontend
+            - client
         environment:
-            DEBUG: 'True'
+            DEBUG: 'False'
             DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
             BROKER_URL: 'amqp://user:password@rabbitmq:5672/my_vhost'
+
     db:
         image: postgres:11.2
         environment:
             POSTGRES_DB: postgres
             POSTGRES_USER: postgres
-
-    frontend:
-        build:
-            context: ./
-            dockerfile: ./client/Dockerfile
-        volumes:
-            - ./client:/client
-        ports:
-            - 8080:8080
-        command: yarn serve
 
     redis:
         image: redis:6.0.6-alpine
@@ -51,3 +39,12 @@ services:
             - ./data:/data
         ports:
             - "6379:6379"
+    client:
+        build:
+            context: ./
+            dockerfile: ./client/Dockerfile
+        volumes:
+            - ./client:/client
+        ports:
+            - 8080:8080
+        command: npm run serve
