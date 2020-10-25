@@ -43,14 +43,14 @@ export default {
 
 <style scoped>
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 0;
   left: 0;
-  background: rgba(62, 62, 62, 0.4);
-  z-index: 999;
-  min-width: 350px;
-  bottom: -1840%;
+  background: rgba(72, 72, 72, 0.8);
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  overflow-y: scroll;
 }
 
 .modal__body {

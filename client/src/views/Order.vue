@@ -1,11 +1,15 @@
 <template>
   <div class="order">
-    <order-items
-      :order="order"
-      class="orderItems"
-      title="В вашем заказе:"
-      footerInfo="Сумма минимального заказа от 490 руб, в отдаленные районы от 1290 руб, подробнее об условиях"
-    />
+    <order-items :order="order" class="orderItems" title="В вашем заказе:">
+      <template v-slot:footerInfo>
+        <p class="order__info">
+          Сумма минимального заказа от 490 руб, в отдаленные районы от 1290 руб,
+          <router-link :to="{ name: 'Delivery' }">
+            подробнее об условиях
+          </router-link>
+        </p>
+      </template>
+    </order-items>
     <el-card class="order__is-auth" v-if="!statusAuth">
       Для продолжения необходимо авторизоваться
       <el-switch
@@ -138,6 +142,11 @@ export default {
 .order__client-info {
   width: 40%;
   min-width: 440px;
+}
+
+.order__info {
+  font-size: 15px;
+  padding: 10px;
 }
 
 .fade-enter-active,

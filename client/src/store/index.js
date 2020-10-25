@@ -138,6 +138,11 @@ export default new Vuex.Store({
   getters: {
     dishes(state) {
       return state.dishes;
+    },
+    totalPrice(state) {
+      return state.order.reduce(function(result, item) {
+        return result + item.count * item.price;
+      }, 0);
     }
   },
   modules: {},

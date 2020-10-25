@@ -90,10 +90,8 @@ export default {
 
 .header__empty {
   width: 100%;
-  background-size: 10px 10px;
   border-top: 1px solid #739900;
   height: 20px;
-  background: #adcc52;
 }
 
 .header__empty-title {
@@ -127,7 +125,7 @@ export default {
   filter: drop-shadow(1px 1px 0 #8ba442);
   top: 50%;
   position: absolute;
-  z-index: 998;
+  z-index: 10;
 }
 
 .header__logo-title {
@@ -141,6 +139,7 @@ export default {
   letter-spacing: 1px;
   display: block;
   left: 50%;
+  z-index: 10;
   position: absolute;
 }
 

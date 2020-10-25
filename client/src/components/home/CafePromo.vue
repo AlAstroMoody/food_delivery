@@ -27,6 +27,7 @@ export default {
 <style scoped>
 .cafe-promo {
   border-radius: 10px;
+  min-width: 800px;
 }
 
 .cafe-promo__container {

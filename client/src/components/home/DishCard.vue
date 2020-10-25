@@ -1,6 +1,8 @@
 <template>
   <el-card class="dish" :body-style="{ padding: '0px' }" shadow="hover">
-    <el-image :src="dish.image" class="dish__image" @click="showModal" />
+    <div class="dish__image-box">
+      <el-image :src="dish.image" class="dish__image" @click="showModal" />
+    </div>
     <h1 class="dish__title">{{ dish.name }}</h1>
     <div class="dish__order">
       {{ dish.price }}₽
@@ -42,11 +44,23 @@ export default {
   border-radius: 10px;
   text-align: center;
   justify-content: center;
+  height: auto;
+}
+
+.dish__image-box {
+  display: flex;
+  width: 100%;
+  height: 298px;
+}
+
+.el-card__body {
+  width: 100%;
 }
 
 .dish__image {
   margin: auto;
   width: 100%;
+  height: 100%;
 }
 
 .dish__title {
@@ -54,6 +68,7 @@ export default {
   font-weight: lighter;
   padding: 5px;
   min-height: 120px;
+  margin: 6px;
 }
 
 .dish__order {
@@ -74,35 +89,18 @@ export default {
   box-shadow: 0 0 5px 0 rgba(252, 146, 33, 0.5);
 }
 
-@media screen and (max-width: 850px) {
-  .dish__title {
-    font-size: 18px;
-  }
-  .dish__order {
-    font-size: 18px;
-  }
-  .dish__button {
-    font-size: 17px;
-  }
-  .dish__title {
-    font-size: 19px;
-  }
-}
-
 @media screen and (max-width: 700px) {
   .dish__title {
     font-size: 16px;
   }
-  .dish__order {
-    justify-content: center;
-  }
   .dish__button {
-    margin-left: 15px;
+    padding: 10px;
+    font-size: 15px;
   }
-}
-@media screen and (max-width: 450px) {
-  .dish__button {
-    margin-left: 5px;
+  .dish__image-box {
+    width: 100%;
+    min-height: 148px;
+    height: auto;
   }
 }
 </style>

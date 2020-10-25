@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" >
     <div class="home__filters" :class="{ 'home__filters-show': showFilter }">
       <el-button
         type="text"
@@ -67,6 +67,7 @@
         </div>
       </transition-group>
     </section>
+    <el-backtop />
   </div>
 </template>
 
@@ -149,6 +150,7 @@ export default {
 
 .home__cafe {
   width: 80%;
+  min-width: 600px;
 }
 
 .home__cart {
@@ -163,7 +165,7 @@ export default {
   padding: 5px;
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 9;
   border: 1px solid #e5e5e5;
   margin-top: -5px;
 }
@@ -203,7 +205,7 @@ export default {
 .home__menu-cards {
   display: flex;
   width: 30%;
-  min-width: 190px;
+  min-width: 300px;
   min-height: 200px;
   max-width: 300px;
   margin: 1%;
@@ -236,12 +238,15 @@ export default {
     left: 5%;
   }
 
-  .home__menu-cards {
-    min-width: 250px;
-  }
-
   .home__filters {
     width: 90%;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .home__menu-cards {
+    width: 48%;
+    min-width: 250px;
   }
 }
 
@@ -297,10 +302,14 @@ export default {
     font-size: 25px;
   }
 }
-@media screen and (max-width: 550px) {
+
+@media screen and (max-width: 520px) {
   .home__menu-cards {
-    width: 48%;
-    min-width: 180px;
+    min-width: 148px;
+  }
+  .home__cafe {
+    width: 98%;
+    min-width: 370px;
   }
 }
 
