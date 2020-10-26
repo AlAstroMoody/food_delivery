@@ -5,12 +5,12 @@ services:
             context: ./
             dockerfile: ./nginx/Dockerfile
         depends_on:
-            - backend
+            - server
         ports:
             - 80:80
         volumes:
             - ./server/media:/nginx/media
-    backend:
+    server:
         build:
             context: ./
             dockerfile: ./server/Dockerfile
@@ -20,7 +20,6 @@ services:
         depends_on:
             - db
             - redis
-            - client
         environment:
             DEBUG: 'False'
             DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
@@ -39,12 +38,4 @@ services:
             - ./data:/data
         ports:
             - "6379:6379"
-    client:
-        build:
-            context: ./
-            dockerfile: ./client/Dockerfile
-        volumes:
-            - ./client:/client
-        ports:
-            - 8080:8080
-        command: npm run serve
+

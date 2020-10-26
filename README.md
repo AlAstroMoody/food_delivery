@@ -25,6 +25,7 @@
 
 `sudo service docker restart`
 
+Установить docker-compose!
 Для запуска docker-compose без sudo (для локалки)  
 `sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose`
 
