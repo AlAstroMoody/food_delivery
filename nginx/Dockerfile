@@ -16,6 +16,7 @@ FROM nginx:1.13
 
 RUN rm -v /etc/nginx/nginx.conf
 COPY ./nginx/nginx.conf /etc/nginx/
+COPY ./client/dist /etc/nginx/html
 
 RUN mkdir /nginx
 COPY --from=server /server/staticfiles /nginx/static

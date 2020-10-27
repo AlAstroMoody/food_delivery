@@ -1,6 +1,6 @@
 .DS_Store
 client/node_modules
-/client/dist
+#/client/dist
 /client/build
 /server/staticfiles
 /server/media

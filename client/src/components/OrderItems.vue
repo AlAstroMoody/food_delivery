@@ -95,7 +95,7 @@ export default {
 
 .order__body {
   max-height: 250px;
-  height: 250px;
+  min-height: 50px;
   overflow: auto;
   width: 100%;
   border-bottom: 2px solid #999999;
