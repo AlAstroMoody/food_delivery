@@ -10,8 +10,8 @@
       <input-field
         name="Номер телефона"
         :value.sync="profile.phone"
-        placeholder="+7-xxx-xxxxxxx"
-        :pattern="/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7}$/"
+        placeholder="7-xxx-xxxxxxx"
+        :pattern="/^((8|7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7}$/"
       />
       <text-area-field name="Комментарий к заказу" :value.sync="comment" />
       <el-switch

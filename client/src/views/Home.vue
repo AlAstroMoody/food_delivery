@@ -263,7 +263,7 @@ export default {
 
   .home__filters {
     position: fixed;
-    top: 10%;
+    top: 77px;
     left: -250px;
     text-align: left;
     flex-direction: column;
@@ -271,6 +271,7 @@ export default {
     max-width: 200px;
     align-content: flex-start;
     transition: left 0.3s linear;
+    border: 1px solid #685252;
   }
 
   .home__filters-hidden {
@@ -309,7 +310,7 @@ export default {
   }
   .home__cafe {
     width: 98%;
-    min-width: 370px;
+    min-width: 360px;
   }
 }
 

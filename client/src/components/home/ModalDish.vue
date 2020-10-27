@@ -78,8 +78,9 @@ export default {
   display: flex;
   top: 10%;
   position: fixed;
-  width: 60%;
-  min-width: 380px;
+  width: 80%;
+  min-width: 500px;
+  max-width: 1000px;
   z-index: 10;
   border-radius: 10px;
 }
@@ -133,6 +134,21 @@ export default {
 
   .modal__info {
     font-size: 12px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .modal__body {
+    flex-direction: column;
+    width: 100%;
+  }
+  .modal__left {
+    width: 100%;
+  }
+  .modal__right {
+    width: 100%;
+  }
+  .modal__card {
+    min-width: 90%;
   }
 }
 </style>
