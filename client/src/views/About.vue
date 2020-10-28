@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import BoxForInfo from "@/components/boxForInfo";
+import BoxForInfo from "@/components/BoxForInfo";
 export default {
   name: "About",
   components: { BoxForInfo }
@@ -75,6 +75,10 @@ h2 {
   font-weight: 100;
   font-size: 40px;
   line-height: 1.38;
+}
+
+p {
+  text-align: justify;
 }
 
 .boom-enter-active {

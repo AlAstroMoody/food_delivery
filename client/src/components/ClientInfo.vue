@@ -1,13 +1,13 @@
 <template>
   <div class="client-info">
     <form class="client-info__form">
-      <input-field
+      <text-field
         name="Как вас зовут?"
         :value.sync="profile.name"
         :pattern="/^[a-zA-Zа-яА-Я_ ]{2,30}$/"
         placeholder="введите имя"
       />
-      <input-field
+      <text-field
         name="Номер телефона"
         :value.sync="profile.phone"
         placeholder="7-xxx-xxxxxxx"
@@ -25,7 +25,7 @@
       >
       </el-switch>
       <transition name="fade" mode="out-in">
-        <input-field
+        <text-field
           v-if="delivery"
           name="Адрес доставки:"
           :value.sync="profile.address"
@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import inputField from "@/components/fields/textField";
-import TextAreaField from "@/components/fields/textAreaField";
-import SelectField from "@/components/fields/selectField";
+import TextField from "@/components/fields/TextField";
+import TextAreaField from "@/components/fields/TextAreaField";
+import SelectField from "@/components/fields/SelectField";
 import { CENTER, VZLETKA } from "@/api/const";
 
 export default {
@@ -80,9 +80,9 @@ export default {
     }
   },
   components: {
+    TextField,
     SelectField,
-    TextAreaField,
-    inputField
+    TextAreaField
   },
   methods: {
     returnPlace(address) {

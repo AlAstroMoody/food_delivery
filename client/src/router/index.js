@@ -33,7 +33,7 @@ const routes = [
     component: Delivery
   },
   {
-    path: "/map/",
+    path: "/map/:place/",
     name: "Map",
     component: Map
   },

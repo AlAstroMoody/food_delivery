@@ -1,5 +1,5 @@
 <template>
-  <div class="home" >
+  <div class="home">
     <div class="home__filters" :class="{ 'home__filters-show': showFilter }">
       <el-button
         type="text"
@@ -322,6 +322,10 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.el-button--text {
+  text-align: left;
 }
 
 .home__filters-button {

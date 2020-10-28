@@ -27,17 +27,22 @@ export default {
   data() {
     return {
       center: {
-        title: "Майк и молли на Диктатуры",
+        title: "Майк и Молли на Диктатуры",
         coords: [56.011975, 92.8589]
       },
       vzletka: {
-        title: "Майк и молли на Партизана",
+        title: "Майк и Молли на Партизана",
         coords: [56.031275, 92.9179]
       },
       place: ""
     };
   },
-  components: { YandexMap }
+  components: { YandexMap },
+  created() {
+    if (this.$route.params.place === 1) {
+      this.place = this.center;
+    } else this.place = this.vzletka;
+  }
 };
 </script>
 
@@ -47,6 +52,7 @@ export default {
   height: 610px;
   position: relative;
 }
+
 .delivery__button-first {
   position: absolute;
   right: 5px;

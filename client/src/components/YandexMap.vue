@@ -1,6 +1,15 @@
 <template>
-  <yandex-map :coords="coords" :zoom="15" class="map">
+  <yandex-map :coords="coords" :zoom="zoom" class="map">
     <ymap-marker :coords="coords" marker-id="123" :hint-content="title" />
+    <ymap-marker
+      v-for="zone in zones"
+      :key="zone.title"
+      :marker-id="zone.title"
+      :coords="zone.coords"
+      marker-type="polyline"
+      :hint-content="zone.title"
+      :marker-stroke="{ color: zone.color, width: 5 }"
+    />
   </yandex-map>
 </template>
 
@@ -15,7 +24,15 @@ export default {
     },
     title: {
       type: String,
-      default: ""
+      default: "Майк и Молли"
+    },
+    zones: {
+      type: Array,
+      default: () => []
+    },
+    zoom: {
+      type: Number,
+      default: 15
     }
   },
   components: { yandexMap, ymapMarker }

@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import inputField from "@/components/fields/textField";
-import dataField from "@/components/fields/dataField";
+import inputField from "@/components/fields/TextField";
+import dataField from "@/components/fields/DataField";
 import { CENTER, VZLETKA } from "@/api/const";
 import { mapActions } from "vuex";
 

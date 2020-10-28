@@ -51,6 +51,13 @@ export default {
 @media screen and (max-width: 1440px) {
   .cafe__info {
     width: 100%;
+    min-width: 900px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .cafe__info {
+    width: 100%;
     min-width: 600px;
   }
 }

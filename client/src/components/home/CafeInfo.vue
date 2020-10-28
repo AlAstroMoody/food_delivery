@@ -10,12 +10,12 @@
       <i class="el-icon-location" />
       Наш адрес:
       <div class="cafe-info__address-link">
-        <router-link :to="{ name: 'Map' }">
+        <router-link :to="{ name: 'Map', params: { place: 1 } }">
           ул. Диктатуры пролетариата, 32а
         </router-link>
       </div>
       <div class="cafe-info__address-link">
-        <router-link :to="{ name: 'Map' }">
+        <router-link :to="{ name: 'Map', params: { place: 2 } }">
           ул. Партизана Железняка, 26а
         </router-link>
       </div>
@@ -44,6 +44,7 @@ export default {
   font-size: 20px;
   line-height: 1.21;
   padding: 20px;
+  max-width: 400px;
 }
 
 @media screen and (max-width: 1440px) {

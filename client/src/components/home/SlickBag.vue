@@ -2,7 +2,7 @@
   <el-card class="slick-bag" :body-style="{ padding: '0px' }">
     <div class="slick-bag__header">Ваш заказ</div>
     <div class="slick-bag__body" v-if="order.length === 0">
-      Нажмите «ЗАКАЗАТЬ» чтобы товар добавился к заказу.
+      Нажмите «ЗАКАЗАТЬ», чтобы товар добавился к заказу.
     </div>
     <order-items :order="order" class="slick-bag__order-items" />
     <div class="slick-bag__footer">

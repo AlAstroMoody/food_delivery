@@ -1,6 +1,6 @@
 <template>
   <div class="order">
-    <order-items :order="order" class="orderItems" title="В вашем заказе:">
+    <order-items :order="order" class="order__items" title="В вашем заказе:">
       <template v-slot:footerInfo>
         <p class="order__info">
           Сумма минимального заказа от 490 руб, в отдаленные районы от 1290 руб,
@@ -127,10 +127,10 @@ export default {
   align-items: center;
 }
 
-.orderItems {
+.order__items {
   width: 50%;
   font-size: 25px;
-  min-width: 370px;
+  min-width: 360px;
 }
 
 .order__is-auth {
@@ -166,21 +166,21 @@ export default {
 }
 
 @media screen and (max-width: 1400px) {
-  .orderItems {
+  .order__items {
     width: 70%;
   }
 }
 @media screen and (max-width: 1100px) {
-  .orderItems {
+  .order__items {
     width: 80%;
   }
 }
 
 @media screen and (max-width: 780px) {
-  .orderItems {
+  .order__items {
     width: 90%;
   }
-  .orderItems {
+  .order__items {
     font-size: 20px;
   }
 }

@@ -28,7 +28,7 @@
               class="order__body-button"
             />
             <div class="order__body-price">
-              <i>{{ item.price * item.count }}₽</i>
+              <animated-number :number="item.price * item.count" />
             </div>
           </div>
         </div>
@@ -104,10 +104,9 @@ export default {
 .order__body-dishes {
   display: flex;
   flex-wrap: wrap;
-  margin: 1%;
+  margin: 2%;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #999999;
 }
 
 .order__body-button {
@@ -116,14 +115,15 @@ export default {
 
 .order__body-title {
   text-align: left;
-  width: 50%;
-  min-width: 250px;
+  width: 250px;
+  margin: 3px;
 }
 
 .order__body-price {
   color: orange;
   text-align: left;
   width: 20%;
+  min-width: 80px;
 }
 
 .order__body-action {
@@ -147,8 +147,7 @@ export default {
   color: orange;
   font-size: 35px;
   border-bottom: 1px solid #999999;
-  margin-right: 20px;
-  margin-bottom: 5px;
+  margin: 0 20px 5px;
 }
 
 .fade-enter-active,

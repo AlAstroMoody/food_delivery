@@ -6,6 +6,7 @@
         class="authorization__login"
         placeholder="логин"
         v-model="editLogin"
+        :class="!loginValid ? 'error' : ''"
       />
       <i v-if="!loginValid" class="authorization__error">
         {{ loginErrorInfo }}
@@ -14,6 +15,7 @@
         class="authorization__password"
         placeholder="пароль"
         v-model="editPassword"
+        :class="!passwordValid ? 'error' : ''"
       />
       <i v-if="!passwordValid" class="authorization__error">
         {{ passwordErrorInfo }}
@@ -21,20 +23,16 @@
       <el-input
         v-if="!auth"
         class="authorization__password"
-        placeholder="подтвердите пароль"
+        placeholder="подтверждение пароля"
         v-model="editSecondPassword"
+        :class="!passwordSecondValid ? 'error' : ''"
       />
       <i v-if="!passwordSecondValid & !auth" class="authorization__error">
         {{ passwordSecondErrorInfo }}
       </i>
     </div>
     <div>
-      <el-button
-        round
-        type="success"
-        @click="signIn"
-        :disabled="!loginValid || !passwordValid || !passwordSecondValid"
-      >
+      <el-button round type="success" @click="signIn" :disabled="disabled">
         {{ buttonTitle }}
       </el-button>
     </div>
@@ -69,6 +67,16 @@ export default {
     }
   },
   computed: {
+    disabled() {
+      return (
+        !this.loginValid ||
+        !this.passwordValid ||
+        !this.passwordSecondValid ||
+        !this.login ||
+        !this.password ||
+        (!this.passwordRepeat && !this.auth)
+      );
+    },
     editLogin: {
       get() {
         return this.login;
@@ -139,15 +147,53 @@ export default {
   flex-direction: column;
   align-items: flex-start;
 }
+
 .authorization__login {
   margin: 1%;
 }
+
 .authorization__password {
   margin: 1%;
 }
+
 .authorization__error {
   font-size: 15px;
   text-align: left;
   color: red;
+}
+
+.error {
+  outline: 2px solid red;
+  animation-name: shakeError;
+  animation-fill-mode: forwards;
+  animation-duration: 600ms;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes shakeError {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(0.375rem);
+  }
+  30% {
+    transform: translateX(-0.375rem);
+  }
+  45% {
+    transform: translateX(0.375rem);
+  }
+  60% {
+    transform: translateX(-0.375rem);
+  }
+  75% {
+    transform: translateX(0.375rem);
+  }
+  90% {
+    transform: translateX(-0.375rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 </style>
