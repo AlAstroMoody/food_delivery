@@ -1,8 +1,7 @@
 <template>
   <el-card class="dish" :body-style="{ padding: '0px' }" shadow="hover">
-    <div class="dish__image-box">
-      <el-image :src="dish.image" class="dish__image" @click="showModal" />
-    </div>
+    <el-image :src="dish.image" class="dish__image" @click="showModal" />
+
     <h1 class="dish__title">{{ dish.name }}</h1>
     <div class="dish__order">
       {{ dish.price }}₽
@@ -47,20 +46,14 @@ export default {
   height: auto;
 }
 
-.dish__image-box {
-  display: flex;
-  width: 100%;
-  height: 298px;
-}
-
 .el-card__body {
   width: 100%;
 }
 
 .dish__image {
   margin: auto;
-  width: 100%;
-  height: 100%;
+  width: 276px;
+  height: 276px;
 }
 
 .dish__title {
@@ -89,7 +82,12 @@ export default {
   box-shadow: 0 0 5px 0 rgba(252, 146, 33, 0.5);
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 960px) {
+  .dish__image {
+    margin: auto;
+    width: 190px;
+    height: 190px;
+  }
   .dish__title {
     font-size: 16px;
   }
@@ -97,10 +95,28 @@ export default {
     padding: 10px;
     font-size: 15px;
   }
-  .dish__image-box {
-    width: 100%;
-    min-height: 148px;
-    height: auto;
+  .dish__order {
+    font-size: 17px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .dish__image {
+    margin: auto;
+    width: 148px;
+    height: 148px;
+  }
+  .dish__order {
+    font-size: 12px;
+  }
+  .dish__button {
+    font-size: 12px;
+  }
+  .dish__order {
+    font-size: 14px;
+  }
+  .dish__title {
+    font-size: 10px;
+    min-height: 60px;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <the-header />
-    <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in" class="app__body">
       <router-view />
     </transition>
     <the-footer />
@@ -29,6 +29,7 @@ export default {
   -webkit-text-size-adjust: none;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 a {

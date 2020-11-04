@@ -39,7 +39,6 @@
         type="text"
       />
     </router-link>
-    <about-cafe class="home__cafe" />
     <transition name="fade">
       <modal-dish
         v-if="modalVisible"
@@ -49,23 +48,26 @@
       />
     </transition>
     <section class="home__main">
-      <slick-bag class="home__slick-bag" :order="order" />
-      <h2 class="home__menu" v-if="queryDishes.length < 1">
-        По вашему запросу ничего не найдено!
-      </h2>
-      <transition-group name="fade" class="home__menu" v-else>
-        <div
-          v-for="dish in queryDishes"
-          :key="dish.id"
-          class="home__menu-cards"
-        >
-          <dish-card
-            :dish="dish"
-            @addToOrder="addToOrder(dish)"
-            @showModal="showModal"
-          />
-        </div>
-      </transition-group>
+      <about-cafe class="home__cafe" />
+      <div class="home__main-menu">
+        <slick-bag class="home__slick-bag" :order="order" />
+        <h2 class="home__menu" v-if="queryDishes.length < 1">
+          По вашему запросу ничего не найдено!
+        </h2>
+        <transition-group name="fade" class="home__menu" v-else>
+          <div
+            v-for="dish in queryDishes"
+            :key="dish.id"
+            class="home__menu-cards"
+          >
+            <dish-card
+              :dish="dish"
+              @addToOrder="addToOrder(dish)"
+              @showModal="showModal"
+            />
+          </div>
+        </transition-group>
+      </div>
     </section>
     <el-backtop />
   </div>
@@ -148,26 +150,24 @@ export default {
   display: none;
 }
 
-.home__cafe {
-  width: 80%;
-  min-width: 600px;
-}
-
 .home__cart {
   display: none;
 }
 
 .home__filters {
   display: flex;
-  width: 60%;
+  width: 100%;
   background: white;
-  border-radius: 10px;
   padding: 5px;
   position: sticky;
   top: 0;
   z-index: 9;
-  border: 1px solid #e5e5e5;
-  margin-top: -5px;
+  border-bottom: 1px solid #e5e5e5;
+  justify-content: center;
+}
+
+.el-input {
+  max-width: 150px;
 }
 
 .home__filters-hidden {
@@ -176,20 +176,34 @@ export default {
 
 .home__main {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  justify-content: center;
+}
+
+.home__cafe {
+  width: 70%;
+  display: flex;
+  min-width: 1310px;
+  max-width: 1800px;
+  margin: 10px auto;
+}
+
+.home__main-menu {
+  display: flex;
+  width: 70%;
+  min-width: 1310px;
+  max-width: 1800px;
+  margin: auto;
+  justify-content: space-between;
 }
 
 .home__slick-bag {
-  width: 20%;
+  width: 350px;
   height: 100%;
   min-height: 300px;
   border-radius: 10%;
   position: sticky;
-  min-width: 300px;
-  max-width: 400px;
   top: 60px;
-  left: 10%;
 }
 
 .home__menu {
@@ -197,18 +211,16 @@ export default {
   justify-content: center;
   align-items: center;
   align-content: center;
-  width: 60%;
-  margin-left: 5%;
+  width: 950px;
   flex-wrap: wrap;
+  margin: auto;
 }
 
 .home__menu-cards {
-  display: flex;
-  width: 30%;
-  min-width: 300px;
-  min-height: 200px;
-  max-width: 300px;
-  margin: 1%;
+  width: 276px;
+  height: 480px;
+  margin-left: 38px;
+  margin-bottom: 38px;
 }
 
 .home__modal-dish {
@@ -217,36 +229,20 @@ export default {
   align-items: center;
 }
 
-@media screen and (max-width: 1600px) {
-  .home__menu {
-    width: 80%;
+@media screen and (max-width: 1440px) {
+  .home__main-menu {
+    width: 900px;
+    min-width: auto;
   }
-
-  .home__slick-bag {
-    left: 5%;
-  }
-}
-
-@media screen and (max-width: 1400px) {
-  .home__menu {
-    width: 100%;
-    justify-content: center;
-    margin-left: 5%;
-  }
-
-  .home__slick-bag {
-    left: 5%;
-  }
-
-  .home__filters {
-    width: 90%;
-  }
-}
-
-@media screen and (max-width: 980px) {
   .home__menu-cards {
-    width: 48%;
-    min-width: 250px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  .home__slick-bag {
+    width: 400px;
+  }
+  .home__cafe {
+    min-width: 900px;
   }
 }
 
@@ -256,14 +252,19 @@ export default {
     justify-content: center;
     margin-left: auto;
   }
-
+  .home__main-menu {
+    width: 600px;
+  }
+  .home__cafe {
+    min-width: 600px;
+    width: 600px;
+  }
   .home__slick-bag {
     display: none;
   }
-
   .home__filters {
     position: fixed;
-    top: 77px;
+    top: 72px;
     left: -250px;
     text-align: left;
     flex-direction: column;
@@ -273,16 +274,13 @@ export default {
     transition: left 0.3s linear;
     border: 1px solid #685252;
   }
-
   .home__filters-hidden {
     display: flex;
     flex-direction: column;
   }
-
   .home__filters-button {
     text-align: left;
   }
-
   .home__drawer {
     position: fixed;
     display: flex;
@@ -292,7 +290,6 @@ export default {
     color: white;
     font-size: 25px;
   }
-
   .home__cart {
     position: fixed;
     display: flex;
@@ -302,21 +299,48 @@ export default {
     color: white;
     font-size: 25px;
   }
+  .home__menu-cards {
+    width: 190px;
+    height: 350px;
+    margin: 5px 5px 35px auto;
+  }
 }
 
-@media screen and (max-width: 520px) {
-  .home__menu-cards {
-    min-width: 148px;
+@media screen and (max-width: 600px) {
+  .home__menu {
+    width: 100%;
+    justify-content: center;
   }
   .home__cafe {
-    width: 98%;
-    min-width: 360px;
+    min-width: auto;
+    width: 480px;
+  }
+  .home__main-menu {
+    width: 480px;
+  }
+  .home__menu-cards {
+    width: 148px;
+    height: 250px;
+    margin: 5px 5px 27px auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home__main-menu {
+    max-width: 100%;
+  }
+  .home__cafe {
+    width: 100%;
+  }
+  .home__menu-cards {
+    margin: 1%;
+    height: auto;
   }
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s;
+  transition: opacity 0.3s;
 }
 
 .fade-enter,
@@ -348,5 +372,6 @@ export default {
 
 .home__filters-show {
   left: 1%;
+  border-radius: 10px;
 }
 </style>

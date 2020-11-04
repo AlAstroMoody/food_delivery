@@ -33,39 +33,33 @@ export default {
 .cafe {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   margin: 1%;
   height: auto;
 }
 
 .cafe__info {
-  width: 30%;
-  min-width: 300px;
+  width: 385px;
 }
 
 .cafe__promo {
-  width: 60%;
-  min-width: 740px;
+  width: 900px;
+  margin: auto;
 }
 
 @media screen and (max-width: 1440px) {
   .cafe__info {
-    width: 100%;
-    min-width: 900px;
+    width: 900px;
+    margin: 1% auto;
   }
 }
-
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 960px) {
   .cafe__info {
-    width: 100%;
-    min-width: 600px;
+    width: 700px;
   }
-}
-
-@media screen and (max-width: 800px) {
   .cafe__promo {
-    min-width: 90%;
-    height: 270px;
+    width: 700px;
+    height: 250px;
   }
 }
 
@@ -74,9 +68,15 @@ export default {
     display: none;
   }
   .cafe__promo {
-    width: 90%;
-    min-width: 350px;
+    width: 480px;
+    min-width: 370px;
     height: 200px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .cafe__promo {
+    height: 150px;
   }
 }
 </style>

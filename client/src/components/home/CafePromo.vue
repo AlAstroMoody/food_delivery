@@ -27,25 +27,13 @@ export default {
 <style scoped>
 .cafe-promo {
   border-radius: 10px;
-  min-width: 800px;
-}
-
-.cafe-promo__container {
-  display: flex;
 }
 
 .cafe-promo__image {
   min-width: 350px;
-  width: 100%;
+  width: 95%;
   height: auto;
   margin: auto;
   position: relative;
-  top: -8%;
-}
-
-@media screen and (max-width: 600px) {
-  .cafe-promo__image {
-    top: -20%;
-  }
 }
 </style>

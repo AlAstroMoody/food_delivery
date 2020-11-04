@@ -148,6 +148,7 @@ export default {
   font-size: 35px;
   border-bottom: 1px solid #999999;
   margin: 0 20px 5px;
+  min-width: 130px;
 }
 
 .fade-enter-active,

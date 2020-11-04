@@ -43,8 +43,7 @@ export default {
   text-align: left;
   font-size: 20px;
   line-height: 1.21;
-  padding: 20px;
-  max-width: 400px;
+  height: auto;
 }
 
 @media screen and (max-width: 1440px) {
